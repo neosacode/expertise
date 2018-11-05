@@ -5,3 +5,6 @@ django-model-utils
 django-cities-light
 psycopg2-binary
 django-admin-interface
+gunicorn
+psycogreen
+gevent
