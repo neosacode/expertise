@@ -8,3 +8,4 @@ django-admin-interface
 gunicorn
 psycogreen
 gevent
+whitenoise
