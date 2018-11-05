@@ -1,0 +1,7 @@
+Django
+Prettyconf
+dj-database-url
+django-model-utils
+django-cities-light
+psycopg2-binary
+django-admin-interface
