@@ -141,5 +141,5 @@ AWS_S3_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
 
 # GDAL library config
 
-settings.GDAL_LIBRARY_PATH = config('GDAL_LIBRARY_PATH', default=None)
-settings.GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
+GDAL_LIBRARY_PATH = config('GDAL_LIBRARY_PATH', default=None)
+GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
