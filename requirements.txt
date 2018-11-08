@@ -9,3 +9,4 @@ gunicorn
 psycogreen
 gevent
 whitenoise
+django-extended-choices
