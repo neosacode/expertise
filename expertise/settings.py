@@ -138,3 +138,8 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_SESSION_TOKEN = config('AWS_SESSION_TOKEN', default='')
 AWS_S3_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
+
+# GDAL library config
+
+settings.GDAL_LIBRARY_PATH = config('GDAL_LIBRARY_PATH', default=None)
+settings.GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
