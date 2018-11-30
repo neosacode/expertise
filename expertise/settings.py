@@ -151,3 +151,4 @@ GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
 
 LOGIN_URL = '/dashboard/login'
 LOGIN_REDIRECT_URL = '/dashboard'
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=config.boolean)
