@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-30 17:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/core/models.py:21 apps/core/models.py:83
+msgid "User"
+msgstr "Usuário"
+
+#: apps/core/models.py:22
+msgid "Users"
+msgstr "Usuários"
+
+#: apps/core/models.py:26 apps/core/models.py:35
+msgid "Name"
+msgstr "Nome"
+
+#: apps/core/models.py:27 apps/core/models.py:36
+msgid "Description"
+msgstr "Descrição"
+
+#: apps/core/models.py:30
+msgid "Indicator"
+msgstr "Indicador"
+
+#: apps/core/models.py:31
+msgid "Indicators"
+msgstr "Indicadores"
+
+#: apps/core/models.py:37
+msgid "Requests limit"
+msgstr "Limite de solicitações"
+
+#: apps/core/models.py:40
+msgid "Plan"
+msgstr "Plano"
+
+#: apps/core/models.py:41
+msgid "Plans"
+msgstr "Planos"
+
+#: apps/core/models.py:46
+msgid "Requested"
+msgstr "Solicitado"
+
+#: apps/core/models.py:47
+msgid "Regisration found"
+msgstr "Matrícula encontrada"
+
+#: apps/core/models.py:48
+msgid "Analyzed"
+msgstr "Análisado"
+
+#: apps/core/models.py:51 apps/core/models.py:75
+msgid "State"
+msgstr "Estado"
+
+#: apps/core/models.py:52
+msgid "Region"
+msgstr "Estado"
+
+#: apps/core/models.py:53
+msgid "City"
+msgstr "Cidade"
+
+#: apps/core/models.py:54
+msgid "Address"
+msgstr "Endereço"
+
+#: apps/core/models.py:55
+msgid "Number"
+msgstr "Número"
+
+#: apps/core/models.py:56
+msgid "Neighborhood"
+msgstr "Bairro"
+
+#: apps/core/models.py:57
+msgid "Block"
+msgstr "Bloco"
+
+#: apps/core/models.py:58
+msgid "Lot"
+msgstr "Lote"
+
+#: apps/core/models.py:59
+msgid "Latitude"
+msgstr ""
+
+#: apps/core/models.py:60
+msgid "Longitude"
+msgstr ""
+
+#: apps/core/models.py:61
+msgid "Registration"
+msgstr "Matrícula"
+
+#: apps/core/models.py:64 apps/core/models.py:74
+msgid "Analyse"
+msgstr "Análise"
+
+#: apps/core/models.py:65
+msgid "Analyses"
+msgstr "Análises"
+
+#: apps/core/models.py:70
+msgid "Ok"
+msgstr "Certo"
+
+#: apps/core/models.py:71
+msgid "Not Ok"
+msgstr "Errado"
+
+#: apps/core/models.py:78
+msgid "Report"
+msgstr "Relatório"
+
+#: apps/core/models.py:79
+msgid "Reports"
+msgstr "Relatórios"
+
+#: apps/core/models.py:84
+msgid "Credit available for new requests"
+msgstr "Crédito disponível para novas solicitaçoẽs"
+
+#: apps/core/models.py:85
+msgid "Credit used"
+msgstr "Crédito usado"
+
+#: apps/core/models.py:86
+msgid "Requests available for free"
+msgstr "Solicitações disponíveis gratuitamente"
+
+#: apps/core/models.py:89
+msgid "Account"
+msgstr "Conta"
+
+#: apps/core/models.py:90
+msgid "Accounts"
+msgstr "Contas"
+
+#: expertise/settings.py:125
+msgid "English"
+msgstr "Inglês"
+
+#: expertise/settings.py:126
+msgid "Brazilian Portuguese"
+msgstr "Português Brasileiro"
