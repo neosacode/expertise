@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -11,7 +13,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="assets/css/custom.css">
+		<link rel="stylesheet" href="{% static "css/custom.css" %}">
 
 	</head>
 	<body>
@@ -79,19 +81,9 @@
 			<div class="row">
 				<div class="col-md-8">
 					<div class="mt-5 mb-5 ml-10">
-						<a href="/"><img src="assets/img/logo.png" class="img-fluid" width="300"></a>
+						<a href="/"><img src="{% static "img/logo.png" %}" class="img-fluid" width="300"></a>
 
-						<h1 class="ff-fjalla text-uppercase fs-64 mt-10">
-							Verifique a situação <br>
-							do imóvel desejado.
-						</h1>
-
-						<p class="ff-poppins fs-20">
-							Analisamos o histórico do imóvel desejado, casa,<br> 
-							apartamento ou terreno.
-						</p>
-
-						<a href="step-1.html" class="btn btn-primary mt-5 text-uppercase fs-16 ff-poppins font-weight-bold">Vamos Começar <i class="fas fa-arrow-right"></i></a>
+						{% block content %}{% endblock %}
 
 						<hr class="mt-10">
 

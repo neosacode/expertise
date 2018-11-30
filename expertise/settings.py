@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     # Local apps
     'apps.core',
+    'apps.site',
+    'apps.dashboard',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +61,8 @@ ROOT_URLCONF = 'expertise.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,3 +146,8 @@ AWS_S3_BUCKET_NAME = config('AWS_S3_BUCKET_NAME')
 
 GDAL_LIBRARY_PATH = config('GDAL_LIBRARY_PATH', default=None)
 GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
+
+# Login
+
+LOGIN_URL = '/dashboard/login'
+LOGIN_REDIRECT_URL = '/dashboard'
