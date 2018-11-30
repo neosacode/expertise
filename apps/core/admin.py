@@ -22,6 +22,10 @@ class ReportAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    pass
+
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
     pass

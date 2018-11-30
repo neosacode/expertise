@@ -14,6 +14,12 @@ class AuthView(LoginView):
     redirect_authenticated_user = True
 
 
+@method_decorator(login_required, name='dispatch')
 class LogoutView(View):
     def get(self, request):
         return logout_then_login(request)
+
+
+@method_decorator(login_required, name='dispatch')
+class CreditView(TemplateView):
+    template_name = 'dashboard/credit.html'
