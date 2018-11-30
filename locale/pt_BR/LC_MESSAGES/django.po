@@ -160,3 +160,7 @@ msgstr "Inglês"
 #: expertise/settings.py:126
 msgid "Brazilian Portuguese"
 msgstr "Português Brasileiro"
+
+#: expertise/settings.py:126
+msgid "Price"
+msgstr "Preço"

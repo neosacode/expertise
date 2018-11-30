@@ -35,6 +35,8 @@ class Plan(BaseModel, TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"))
     requests_limit = models.IntegerField(verbose_name=_("Requests limit"))
+    price = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Price"), null=True)
+    region = models.ForeignKey(Region, verbose_name=_("Region"), on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = _("Plan")
