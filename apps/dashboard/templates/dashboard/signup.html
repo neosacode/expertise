@@ -139,9 +139,9 @@
                 {% csrf_token %}
 
               {% for field in form %}
-                  <div class="form-label-group">
-                    {{ field }}
-                    {{ field.label_tag }}
+                  <div class="form-group">
+                        <small>{{ field.label_tag }}</small>
+                        {{ field }}
 
                       {% for error in field.errors %}
                           <small><strong class="text-danger">{{ error }}</strong></small>

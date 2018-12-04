@@ -17,6 +17,13 @@ class BaseModel(models.Model):
 
 
 class User(AbstractUser, BaseModel):
+    TYPE_CHOICES = (
+        ('owner', 'Proprietário'),
+        ('real_estate', 'Imobiliária')
+    )
+
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=TYPE_CHOICES[0][0], verbose_name='Qual o seu perfil?')
+
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")

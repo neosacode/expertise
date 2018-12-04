@@ -19,11 +19,12 @@ class ModelFormCustom(forms.ModelForm):
 class UserForm(ModelFormCustom):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['type', 'username', 'email', 'first_name', 'last_name', 'password']
         widgets = {
             'password': forms.PasswordInput()
         }
         custom_attrs = {
+            'type': {'class': 'form-control'},
             'username': {'class': 'form-control'},
             'email': {'class': 'form-control'},
             'first_name': {'class': 'form-control'},
