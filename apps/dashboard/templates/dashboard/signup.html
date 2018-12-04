@@ -6,7 +6,7 @@
     <meta name="viewport"  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Imóvel Periciado - Login</title>
+    <title>Imóvel Periciado - Criar nova conta</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -134,33 +134,25 @@
                   <img src="{% static "img/logo.png" %}" class="img-fluid" width="300">
               </div>
 
-            <h5 class="card-title text-center font-weight-bold">LOGIN</h5>
+            <h5 class="card-title text-center font-weight-bold">CRIAR NOVA CONTA</h5>
             <form class="form-signin" method="post" novalidate>
                 {% csrf_token %}
 
-              <div class="form-label-group">
-                <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Usuário ou e-mail" value="{{ form.username.value|default_if_none:"" }}" required autofocus>
-                <label for="inputEmail">Usuário ou e-mail</label>
-                  {% for error in form.username.errors %}
-                      <small><strong class="text-danger">{{ error }}</strong></small>
-                  {% endfor %}
-              </div>
+              {% for field in form %}
+                  <div class="form-label-group">
+                    {{ field }}
+                    {{ field.label_tag }}
 
+                      {% for error in field.errors %}
+                          <small><strong class="text-danger">{{ error }}</strong></small>
+                      {% endfor %}
+                  </div>
+            {% endfor %}
 
-
-              <div class="form-label-group">
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-                <label for="inputPassword">Senha</label>
-
-                  {% for error in form.password.errors %}
-                      <small><strong class="text-danger">{{ error }}</strong></small>
-                  {% endfor %}
-              </div>
-
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Cadastrar</button>
 
                 <p class="text-center mt-4 mb-0">
-                    <a href="{% url "dashboard:signup" %}">Criar nova conta</a>
+                    <a href="{% url "dashboard:login" %}">Fazer login</a>
                 </p>
             </form>
           </div>

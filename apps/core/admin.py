@@ -14,7 +14,12 @@ class PlanAdmin(admin.ModelAdmin):
 
 @admin.register(Analyze)
 class AnalyzeAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['get_user', 'zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
+
+    def get_user(self, o):
+        return o.user.first_name + ' ' + o.user.last_name if o.user else None
+    get_user.short_description = 'Usuário'
+    get_user.admin_order_field = 'user__username'
 
 
 @admin.register(Report)

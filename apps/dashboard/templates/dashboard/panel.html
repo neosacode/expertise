@@ -18,61 +18,35 @@
         </div>
         <div class="col-md-6">
             <div class="float-right">
-                <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-plus"></i> NOVA ANÁLISE</a>
+                <a href="{% url "dashboard:new-analyze" %}" class="btn btn-warning btn-sm"><i class="fas fa-plus"></i> NOVA ANÁLISE</a>
             </div>
         </div>
     </div>
 
     <table class="table table-bordered shadow-sm mt-4">
         <thead class="text-uppercase fs-12">
+            <th></th>
             <th><i class="fas fa-city"></i> Solicitado em</th>
-            <th><i class="fas fa-city"></i> UF</th>
-            <th><i class="fas fa-city"></i> Cidade</th>
+            <th><i class="fas fa-map-marked-alt"></i> CEP</th>
             <th><i class="fas fa-map-marked-alt"></i> Endereço</th>
             <th><i class="fas fa-file-invoice"></i> Matrícula</th>
-            <th><i class="fas fa-thermometer-quarter"></i> Status</th>
+            <th><i class="fas fa-file-invoice"></i> Quadra</th>
+            <th><i class="fas fa-file-invoice"></i> Lote</th>
+            <th><i class="fas fa-thermometer-quarter"></i> Situação</th>
         </thead>
         <tbody class="fs-14 text-right">
-            <tr>
-                <td>10/10/2018 15:30</td>
-                <td>PR</td>
-                <td>Curitiba</td>
-                <td>Rua Macapa 204, JD Aurora</td>
-                <td>012398801</td>
-                <td><h6 class="m-0"><span class="badge badge-info">Solicitado</span></h6></td>
-            </tr>
-            <tr>
-                <td>10/10/2018 15:30</td>
-                <td>PR</td>
-                <td>Curitiba</td>
-                <td>Rua Macapa 204, JD Aurora</td>
-                <td>012398801</td>
-                <td><h6 class="m-0"><span class="badge badge-info">Solicitado</span></h6></td>
-            </tr>
-            <tr>
-                <td>10/10/2018 15:30</td>
-                <td>PR</td>
-                <td>Curitiba</td>
-                <td>Rua Macapa 204, JD Aurora</td>
-                <td>012398801</td>
-                <td><h6 class="m-0"><span class="badge badge-info">Solicitado</span></h6></td>
-            </tr>
-            <tr>
-                <td>10/10/2018 15:30</td>
-                <td>PR</td>
-                <td>Curitiba</td>
-                <td>Rua Macapa 204, JD Aurora</td>
-                <td>012398801</td>
-                <td><h6 class="m-0"><span class="badge badge-info">Solicitado</span></h6></td>
-            </tr>
-            <tr>
-                <td>10/10/2018 15:30</td>
-                <td>PR</td>
-                <td>Curitiba</td>
-                <td>Rua Macapa 204, JD Aurora</td>
-                <td>012398801</td>
-                <td><h6 class="m-0"><span class="badge badge-info">Solicitado</span></h6></td>
-            </tr>
+            {% for analyze in analyzes %}
+                <tr>
+                    <td><a href="{% url "dashboard:follow-analyze" %}?code={{ analyze.id }}">{{ analyze.id }}</a></td>
+                    <td>{{ analyze.created }}</td>
+                    <td>{{ analyze.zipcode }}</td>
+                    <td>{{ analyze.address }}</td>
+                    <td>{{ analyze.registration_number }}</td>
+                    <td>{{ analyze.block }}</td>
+                    <td>{{ analyze.lot }}</td>
+                    <td><h6 class="m-0"><span class="badge badge-info">{{ analyze.state }}</span></h6></td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

@@ -2,6 +2,7 @@ import os
 import dj_database_url
 from prettyconf import Configuration
 from django.utils.translation import ugettext_lazy as _
+from django.contrib import messages
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -162,3 +163,10 @@ GEOS_LIBRARY_PATH = config('GEOS_LIBRARY_PATH', default=None)
 LOGIN_URL = '/dashboard/login'
 LOGIN_REDIRECT_URL = '/dashboard'
 SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=config.boolean)
+
+
+# Messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}

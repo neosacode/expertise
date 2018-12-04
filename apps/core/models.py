@@ -50,16 +50,14 @@ class Analyze(BaseModel, TimeStampedModel):
         ('analyzed', 'analyzed', _("Analyzed"))
     )
 
-    state = models.CharField(max_length=30, choices=STATES, verbose_name=_("State"))
-    region = models.ForeignKey(Region, verbose_name=_("Region"), on_delete=models.CASCADE)
-    city = models.ForeignKey(City, verbose_name=_("City"), on_delete=models.CASCADE)
+    state = models.CharField(max_length=30, choices=STATES, default=STATES.requested, verbose_name=_("State"))
+    user = models.ForeignKey('core.User', related_name='analyses', on_delete=models.CASCADE, null=True)
     address = models.CharField(max_length=255, null=True, verbose_name=_("Address"))
     number = models.CharField(max_length=255, null=True, verbose_name=_("Number"))
-    neighborhood = models.CharField(max_length=255, null=True, verbose_name=_("Neighborhood"))
+    zipcode = models.CharField(max_length=10, null=True, verbose_name=_("CEP"))
     block = models.CharField(max_length=20, null=True, verbose_name=_("Block"))
     lot = models.CharField(max_length=20, null=True, verbose_name=_("Lot"))
-    latitude = PointField(null=True, verbose_name=_("Latitude"))
-    longitude = PointField(null=True, verbose_name=_("Longitude"))
+    registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Matrícula"))
     registration = models.FileField(null=True, verbose_name=_("Registration"))
 
     class Meta:
