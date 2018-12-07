@@ -6,15 +6,22 @@
     <h5 class="text-uppercase font-weight-bold mt-5">Suas Análises</h5>
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="text" class="form-control fs-14" placeholder="MATRÍCULA">
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-group float-left">
-                <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
-            </div>
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control fs-14" placeholder="Pesquise por matrícula, endereço ou quadra e lote" name="s" value="{{ s }}">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group float-left">
+                            <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-md-6">
             <div class="float-right">
@@ -25,7 +32,7 @@
 
     <table class="table table-bordered shadow-sm mt-4">
         <thead class="text-uppercase fs-12">
-            <th></th>
+            <th><i class="fas fa-barcode"></i> Código</th>
             <th><i class="fas fa-city"></i> Solicitado em</th>
             <th><i class="fas fa-map-marked-alt"></i> CEP</th>
             <th><i class="fas fa-map-marked-alt"></i> Endereço</th>
@@ -37,7 +44,7 @@
         <tbody class="fs-14 text-right">
             {% for analyze in analyzes %}
                 <tr>
-                    <td><a href="{% url "dashboard:follow-analyze" %}?code={{ analyze.id }}">{{ analyze.id }}</a></td>
+                    <td><a href="{% url "dashboard:follow-analyze" %}?code={{ analyze.id }}">{{ analyze.code }}</a></td>
                     <td>{{ analyze.created }}</td>
                     <td>{{ analyze.zipcode }}</td>
                     <td>{{ analyze.address }}</td>
@@ -49,7 +56,7 @@
             {% endfor %}
         </tbody>
     </table>
-
+<!-- 
     <nav class="mt-4 float-right">
       <ul class="pagination fs-14">
         <li class="page-item disabled">
@@ -64,5 +71,5 @@
           <a class="page-link" href="#">Próxima</a>
         </li>
       </ul>
-    </nav>
+    </nav> -->
 {% endblock %}

@@ -67,6 +67,10 @@ class Analyze(BaseModel, TimeStampedModel):
     registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Matrícula"))
     registration = models.FileField(null=True, verbose_name=_("Registration"))
 
+    @property
+    def code(self):
+        return self.id.hex[:10]
+
     class Meta:
         verbose_name = _("Analyse")
         verbose_name_plural = _("Analyses")
