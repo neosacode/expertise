@@ -28,6 +28,8 @@ class ReportInline(admin.TabularInline):
 class AnalyzeAdmin(admin.ModelAdmin):
     list_display = ['get_user', 'zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
     readonly_fields = ['user', 'address', 'number', 'zipcode', 'block', 'lot', 'registration_number']
+    list_filter = ['state']
+    search_fields = ['user__first_name', 'user__last_name', 'user__email']
     inlines = [
         ReportInline
     ]
