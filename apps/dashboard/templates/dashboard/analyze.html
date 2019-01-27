@@ -20,7 +20,7 @@
                    Número: <strong>{{ analyze.number }}</strong><hr>
                    Matrícula: <strong>{{ analyze.registration_number }}</strong><hr>
                    Quadra: <strong>{{ analyze.block }}</strong><hr>
-                   Lote: <strong>{{ analyze.lot }}</strong>analyzed
+                   Lote: <strong>{{ analyze.lot }}</strong>
                 </div>
             </div>
 
@@ -37,9 +37,17 @@
                 <ul class="checklist-real-estate">
                     {% for report in reports %}
                         <li class="{% if report.state == 'ok' %}ok{% else %}not-ok{% endif %}">{{ report.indicator.name }}
-                            <i class="fa fa-check-circle float-right fs-30"></i>
+                            {% if report.state == 'ok' %}
+                                <i class="fa fa-check-circle float-right fs-30"></i>
+                            {% else %}
+                                <i class="fas fa-times-circle float-right fs-30"></i>
+                            {% endif %}
                             {% if report.observation %}
                                 <small class="float-right mr-3">{{ report.observation }}</small>
+                            {% elif report.indicator.observation_ok and report.state == 'ok' %}
+                                <small class="float-right mr-3">{{ report.indicator.observation_ok }}</small>
+                            {% elif report.indicator.observation_not_ok and report.state == 'not_ok' %}
+                                <small class="float-right mr-3">{{ report.indicator.observation_not_ok }}</small>
                             {% endif %}
                         </li>
                     {% endfor %}

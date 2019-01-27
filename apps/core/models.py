@@ -32,6 +32,8 @@ class User(AbstractUser, BaseModel):
 class Indicator(BaseModel, TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"))
+    observation_ok = models.CharField(max_length=100, verbose_name=_("Ok Observation"), null=True, blank=True)
+    observation_not_ok = models.CharField(max_length=100, verbose_name=_("Not Ok Observation"), null=True, blank=True)
 
     def __str__(self):
         return self.name

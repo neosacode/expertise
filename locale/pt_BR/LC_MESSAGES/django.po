@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-27 18:18+0000\n"
+"POT-Creation-Date: 2019-01-27 21:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/core/models.py:28 apps/core/models.py:106
+#: apps/core/models.py:28 apps/core/models.py:108
 msgid "User"
 msgstr "Usuário"
 
@@ -25,136 +25,145 @@ msgstr "Usuário"
 msgid "Users"
 msgstr "Usuários"
 
-#: apps/core/models.py:33 apps/core/models.py:45
+#: apps/core/models.py:33 apps/core/models.py:47
 msgid "Name"
 msgstr "Nome"
 
-#: apps/core/models.py:34 apps/core/models.py:46
+#: apps/core/models.py:34 apps/core/models.py:48
 msgid "Description"
 msgstr "Descrição"
 
-#: apps/core/models.py:40 apps/core/models.py:93
+#: apps/core/models.py:35
+#| msgid "Observation"
+msgid "Ok Observation"
+msgstr "Observação para certo"
+
+#: apps/core/models.py:36
+#| msgid "Observation"
+msgid "Not Ok Observation"
+msgstr "Observação para errado"
+
+#: apps/core/models.py:42 apps/core/models.py:95
 msgid "Indicator"
 msgstr "Indicador"
 
-#: apps/core/models.py:41
+#: apps/core/models.py:43
 msgid "Indicators"
 msgstr "Indicadores"
 
-#: apps/core/models.py:47
+#: apps/core/models.py:49
 msgid "Requests limit"
 msgstr "Limite de solicitações"
 
-#: apps/core/models.py:48
+#: apps/core/models.py:50
 msgid "Price"
 msgstr "Preço"
 
-#: apps/core/models.py:49
+#: apps/core/models.py:51
 msgid "Region"
 msgstr "Estado"
 
-#: apps/core/models.py:52
+#: apps/core/models.py:54
 msgid "Plan"
 msgstr "Plano"
 
-#: apps/core/models.py:53
+#: apps/core/models.py:55
 msgid "Plans"
 msgstr "Planos"
 
-#: apps/core/models.py:58
+#: apps/core/models.py:60
 msgid "Requested"
 msgstr "Solicitado"
 
-#: apps/core/models.py:59
+#: apps/core/models.py:61
 msgid "Regisration found"
 msgstr "Matrícula encontrada"
 
-#: apps/core/models.py:60
+#: apps/core/models.py:62
 msgid "Analyzed"
 msgstr "Análisado"
 
-#: apps/core/models.py:63 apps/core/models.py:94
+#: apps/core/models.py:65 apps/core/models.py:96
 msgid "State"
 msgstr "Estado"
 
-#: apps/core/models.py:65
+#: apps/core/models.py:67
 msgid "Address"
 msgstr "Endereço"
 
-#: apps/core/models.py:66
+#: apps/core/models.py:68
 msgid "Number"
 msgstr "Número"
 
-#: apps/core/models.py:67
+#: apps/core/models.py:69
 msgid "CEP"
 msgstr ""
 
-#: apps/core/models.py:68
+#: apps/core/models.py:70
 msgid "Block"
 msgstr "Bloco"
 
-#: apps/core/models.py:69
+#: apps/core/models.py:71
 msgid "Lot"
 msgstr "Lote"
 
-#: apps/core/models.py:70
+#: apps/core/models.py:72
 msgid "Registration Number"
 msgstr "Número da Matrícula"
 
-#: apps/core/models.py:71
+#: apps/core/models.py:73
 msgid "Registration"
 msgstr "Matrícula"
 
-#: apps/core/models.py:81 apps/core/models.py:92
+#: apps/core/models.py:83 apps/core/models.py:94
 msgid "Analyse"
 msgstr "Análise"
 
-#: apps/core/models.py:82
+#: apps/core/models.py:84
 msgid "Analyses"
 msgstr "Análises"
 
-#: apps/core/models.py:87
+#: apps/core/models.py:89
 msgid "Ok"
 msgstr "Certo"
 
-#: apps/core/models.py:88
+#: apps/core/models.py:90
 msgid "Not Ok"
 msgstr "Errado"
 
-#: apps/core/models.py:89
-#| msgid "Analyzed"
+#: apps/core/models.py:91
 msgid "Not Analyzed"
 msgstr "Não Analisado"
 
-#: apps/core/models.py:95
+#: apps/core/models.py:97
 msgid "Observation"
 msgstr "Observação"
 
-#: apps/core/models.py:101
+#: apps/core/models.py:103
 msgid "Report"
 msgstr "Relatório"
 
-#: apps/core/models.py:102
+#: apps/core/models.py:104
 msgid "Reports"
 msgstr "Relatórios"
 
-#: apps/core/models.py:107
+#: apps/core/models.py:109
 msgid "Credit available for new requests"
 msgstr "Crédito disponível para novas solicitaçoẽs"
 
-#: apps/core/models.py:108
+#: apps/core/models.py:110
 msgid "Credit used"
 msgstr "Crédito usado"
 
-#: apps/core/models.py:109
+#: apps/core/models.py:111
 msgid "Requests available for free"
 msgstr "Solicitações disponíveis gratuitamente"
 
-#: apps/core/models.py:112
+#: apps/core/models.py:114
 msgid "Account"
 msgstr "Conta"
 
-#: apps/core/models.py:113
+#: apps/core/models.py:115
 msgid "Accounts"
 msgstr "Contas"
 
@@ -165,3 +174,7 @@ msgstr "Inglês"
 #: expertise/settings.py:127
 msgid "Brazilian Portuguese"
 msgstr "Português Brasileiro"
+
+#~| msgid "Observation"
+#~ msgid "Default Observation"
+#~ msgstr "Observação Padrão"

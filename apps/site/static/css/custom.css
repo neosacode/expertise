@@ -157,13 +157,13 @@ body {
 	background-color: #FAFAFA;
 	padding: 20px 40px;
 	margin-bottom: 20px;
-	color: #725AC1;
+	color: #327d32;
 	font-weight: bold;
 }
 
 .checklist-real-estate li.not-ok {
 	background-color: #FAFAFA;
-	color: #EB0055;
+	color: #ff5719;
 	font-weight: bold;
 	padding: 20px 40px;
 	margin-bottom: 20px;
