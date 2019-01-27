@@ -85,13 +85,14 @@ class Analyze(BaseModel, TimeStampedModel):
 class Report(BaseModel, TimeStampedModel):
     STATES = Choices(
         ('ok', 'ok', _("Ok")),
-        ('not_ok', 'not_ok', _("Not Ok"))
+        ('not_ok', 'not_ok', _("Not Ok")),
+        ('not_analyzed', 'not_analyzed', _("Not Analyzed")),
     )
 
     analyse = models.ForeignKey(Analyze, verbose_name=_("Analyse"), on_delete=models.CASCADE)
     indicator = models.ForeignKey(Indicator, verbose_name=_("Indicator"), on_delete=models.CASCADE, null=True)
     state = models.CharField(max_length=30, choices=STATES, verbose_name=_("State"))
-    observation = models.CharField(max_length=100, verbose_name=_("Observation"), null=True)
+    observation = models.CharField(max_length=100, verbose_name=_("Observation"), null=True, blank=True)
 
     def __str__(self):
         return '{}-{}'.format(self.analyse.address, self.indicator.name)
