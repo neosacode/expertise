@@ -12,9 +12,25 @@ class PlanAdmin(admin.ModelAdmin):
     pass
 
 
+class ReportInline(admin.TabularInline):
+    model = Report
+    readonly_fields = ('indicator',)
+    fields = ('indicator', 'state', 'observation',)
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def has_delete_permission(self, request, obj):
+        return False
+
+
 @admin.register(Analyze)
 class AnalyzeAdmin(admin.ModelAdmin):
     list_display = ['get_user', 'zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
+    readonly_fields = ['state', 'user', 'address', 'number', 'zipcode', 'block', 'lot', 'registration_number']
+    inlines = [
+        ReportInline
+    ]
 
     def get_user(self, o):
         return o.user.first_name + ' ' + o.user.last_name if o.user else None
@@ -30,6 +46,7 @@ class ReportAdmin(admin.ModelAdmin):
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):

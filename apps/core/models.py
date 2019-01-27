@@ -33,6 +33,9 @@ class Indicator(BaseModel, TimeStampedModel):
     name = models.CharField(max_length=100, verbose_name=_("Name"))
     description = models.TextField(verbose_name=_("Description"))
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = _("Indicator")
         verbose_name_plural = _("Indicators")
@@ -64,12 +67,15 @@ class Analyze(BaseModel, TimeStampedModel):
     zipcode = models.CharField(max_length=10, null=True, verbose_name=_("CEP"))
     block = models.CharField(max_length=20, null=True, verbose_name=_("Block"))
     lot = models.CharField(max_length=20, null=True, verbose_name=_("Lot"))
-    registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Matrícula"))
+    registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Registration Number"))
     registration = models.FileField(null=True, verbose_name=_("Registration"))
 
     @property
     def code(self):
         return self.id.hex[:10]
+
+    def __str__(self):
+        return self.user.email if self.user else 'N/A'
 
     class Meta:
         verbose_name = _("Analyse")
@@ -83,7 +89,12 @@ class Report(BaseModel, TimeStampedModel):
     )
 
     analyse = models.ForeignKey(Analyze, verbose_name=_("Analyse"), on_delete=models.CASCADE)
+    indicator = models.ForeignKey(Indicator, verbose_name=_("Indicator"), on_delete=models.CASCADE, null=True)
     state = models.CharField(max_length=30, choices=STATES, verbose_name=_("State"))
+    observation = models.CharField(max_length=100, verbose_name=_("Observation"), null=True)
+
+    def __str__(self):
+        return '{}-{}'.format(self.analyse.address, self.indicator.name)
 
     class Meta:
         verbose_name = _("Report")
