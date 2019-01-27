@@ -12,22 +12,17 @@
 		Enviaremos por e-mail, um resumo neste formato do que foi encontrado referente ao imóvel avaliado
 	</p>
 
-	<h4 class="text-uppercase font-weight-bold text-uppercase fs-20">Do Imóvel</h4>
-
 	<ul class="checklist-real-estate">
 		<li class="ok">Hipoteca <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="ok">Penhora <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="ok">Alienação <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="not-ok">Indisponibilidade de Bens <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="ok">Dívidas <i class="fa fa-check-circle float-right fs-30"></i></li>
-	</ul>
-
-	<h4 class="text-uppercase font-weight-bold text-uppercase fs-20">Do Proprietário</h4>
-
-	<ul class="checklist-real-estate">
 		<li class="not-ok">Dívida Trabalhista <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="ok">Dívida Estadual <i class="fa fa-check-circle float-right fs-30"></i></li>
 		<li class="ok">Dívida Federal <i class="fa fa-check-circle float-right fs-30"></i></li>
 	</ul>
+
+    <a href="{% url "dashboard:example" %}" class="btn btn-primary mt-5 text-uppercase fs-16 ff-poppins font-weight-bold">Solicitar Análise <i class="fas fa-arrow-right"></i></a>
 
 {% endblock %}
