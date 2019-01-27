@@ -27,7 +27,7 @@ class ReportInline(admin.TabularInline):
 @admin.register(Analyze)
 class AnalyzeAdmin(admin.ModelAdmin):
     list_display = ['get_user', 'zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
-    readonly_fields = ['state', 'user', 'address', 'number', 'zipcode', 'block', 'lot', 'registration_number']
+    readonly_fields = ['user', 'address', 'number', 'zipcode', 'block', 'lot', 'registration_number']
     inlines = [
         ReportInline
     ]

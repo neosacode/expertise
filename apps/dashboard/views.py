@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib import messages
-from apps.core.models import Analyze
+from apps.core.models import Analyze, Report
 from apps.core.forms import UserForm
 
 
@@ -91,6 +91,9 @@ class AnalyseView(TemplateView):
     template_name = 'dashboard/analyze.html'
 
     def get_context_data(self, **kwargs):
+        analyse = Analyze.objects.get(pk=self.request.GET['code'], user=self.request.user)
+
         data = super().get_context_data()
-        data['analyze'] = Analyze.objects.get(pk=self.request.GET['code'])
+        data['analyze'] = analyse
+        data['reports'] = Report.objects.filter(analyse=analyse)
         return data
