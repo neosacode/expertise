@@ -48,9 +48,9 @@
                     <td>{{ analyze.created }}</td>
                     <td>{{ analyze.zipcode }}</td>
                     <td>{{ analyze.address }}</td>
-                    <td>{{ analyze.registration_number }}</td>
-                    <td>{{ analyze.block }}</td>
-                    <td>{{ analyze.lot }}</td>
+                    <td>{{ analyze.registration_number|default_if_none:"N/D" }}</td>
+                    <td>{{ analyze.block|default_if_none:"N/D" }}</td>
+                    <td>{{ analyze.lot|default_if_none:"N/D" }}</td>
                     <td><h6 class="m-0"><span class="badge badge-info">{{ analyze.state_display }}</span></h6></td>
                 </tr>
             {% endfor %}

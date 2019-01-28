@@ -12,6 +12,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from apps.core.models import Analyze, Report
 from apps.core.forms import UserForm
+from apps.dashboard.forms import AnalyseForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -75,7 +76,7 @@ class CreditView(TemplateView):
 class AnalyseFormView(CreateView):
     template_name = 'dashboard/analyze-form.html'
     model = Analyze
-    fields = ['zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
+    form_class = AnalyseForm
 
     def get_success_url(self):
         return reverse('dashboard:panel')

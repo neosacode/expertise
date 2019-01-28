@@ -16,13 +16,18 @@
             <p class="mb-4">Para uma análise precisa, precisamos do máximo de informações referentes ao imóvel</p>
             <hr class="mb-4">
 
-            <form method="post">
+            <p class="mb-4 mt-0">
+                <small class="text-danger">Campos com <strong>*</strong> (asterisco) são obrigatórios.</small><br>
+                <small class="text-danger">Você pode preencher apenas a matrícula. Caso não saiba o seu número da matrícula, preencha a quadra e lote.</small><br>
+            </p>
+
+            <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>CEP</label>
-                            <input type="text" class="form-control" placeholder="00.000-000" name="zipcode">
+                            <label>CEP *</label>
+                            {{ form.zipcode }}
                             {% for error in form.zipcode.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
                           {% endfor %}
@@ -30,8 +35,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Endereço</label>
-                            <input type="text" class="form-control" placeholder="Rua de exemplo sem número" name="address">
+                            <label>Endereço *</label>
+                            {{ form.address }}
                             {% for error in form.address.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
                           {% endfor %}
@@ -39,37 +44,37 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Número</label>
-                            <input type="text" class="form-control" placeholder="000" name="number">
+                            <label>Número *</label>
+                            {{ form.number }}
                             {% for error in form.number.errors %}
                                   <small><strong class="text-danger">{{ error }}</strong></small>
                               {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Mátricula ou quadra e lote</label>
-                            <input type="text" class="form-control" placeholder="nº matrícula" name="registration_number">
+                        <label>Mátricula</label>
+                            {{ form.registration_number }}
                               {% for error in form.registration_number.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
                           {% endfor %}
                         </div>
                     <div class="col-md-4">
-                        <label>&nbsp;2</label>
-                        <input type="text" class="form-control" placeholder="nº quadra" name="block">
+                        <label>Quadra</label>
+                        {{ form.block }}
                             {% for error in form.block.errors %}
                           <small><strong class="text-danger">{{ error }}</strong></small>
                       {% endfor %}
                     </div>
                     <div class="col-md-4">
-                        <label>&nbsp;</label>
-                        <input type="text" class="form-control" placeholder="nº lote" name="lot">
+                        <label>Lote</label>
+                        {{ form.lot }}
                             {% for error in form.lot.errors %}
                           <small><strong class="text-danger">{{ error }}</strong></small>
                       {% endfor %}
                     </div>
                 </div>
 
-                <button type="submit" class="btn float-right btn-dark mt-4 btn-sm">SOLICITAR ANÁLISE</button>
+                <button type="submit" class="btn float-right btn-primary mt-4 btn-sm">SOLICITAR ANÁLISE</button>
             </form>
         </div>
 
