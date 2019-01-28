@@ -13,18 +13,28 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6">
-            <p class="mb-4">Para que uma análise aconteça, precisamos do máximo de informações referentes ao imóvel</p>
+            <p class="mb-4">Para que a perícia acontença, precisamos do máximo de informações referentes ao imóvel</p>
             <hr class="mb-4">
 
             <p class="mb-4 mt-0">
                 <small class="text-danger">Campos com <strong>*</strong> (asterisco) são obrigatórios.</small><br>
                 <small class="text-danger">Você pode preencher apenas a matrícula. Caso não saiba o seu número da matrícula, preencha a quadra e lote.</small><br>
+                <small class="text-danger">Buscamos automáticamente a cidade e estado a partir de seu CEP, portanto não erre.</small><br>
             </p>
 
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Tipo *</label>
+                            {{ form.type }}
+                            {% for error in form.type.errors %}
+                              <small><strong class="text-danger">{{ error }}</strong></small>
+                          {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label>CEP *</label>
                             {{ form.zipcode }}
@@ -33,16 +43,16 @@
                           {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Endereço *</label>
+                            <label>Endereço com cidade e estado *</label>
                             {{ form.address }}
                             {% for error in form.address.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
                           {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <div class="form-group">
                             <label>Número *</label>
                             {{ form.number }}
@@ -51,30 +61,45 @@
                               {% endfor %}
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <label>Mátricula</label>
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <label>Complementos</label>
+                            {{ form.complement }}
+                            {% for error in form.complement.errors %}
+                                  <small><strong class="text-danger">{{ error }}</strong></small>
+                              {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Mátricula</label>
                             {{ form.registration_number }}
                               {% for error in form.registration_number.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
                           {% endfor %}
                         </div>
-                    <div class="col-md-4">
-                        <label>Quadra</label>
-                        {{ form.block }}
-                            {% for error in form.block.errors %}
-                          <small><strong class="text-danger">{{ error }}</strong></small>
-                      {% endfor %}
                     </div>
-                    <div class="col-md-4">
-                        <label>Lote</label>
-                        {{ form.lot }}
-                            {% for error in form.lot.errors %}
-                          <small><strong class="text-danger">{{ error }}</strong></small>
-                      {% endfor %}
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Quadra</label>
+                            {{ form.block }}
+                                {% for error in form.block.errors %}
+                              <small><strong class="text-danger">{{ error }}</strong></small>
+                          {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Lote</label>
+                            {{ form.lot }}
+                                {% for error in form.lot.errors %}
+                              <small><strong class="text-danger">{{ error }}</strong></small>
+                          {% endfor %}
+                        </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn float-right btn-primary mt-4 btn-sm">SOLICITAR PERÍCIA</button>
+                <p class="mt-3 mb-0"><small>Verifique se os dados estão corretos antes de solicitar a perícia</small></p> <button type="submit" class="btn float-right btn-primary btn-sm shadow">SOLICITAR PERÍCIA</button>
             </form>
         </div>
 
@@ -82,4 +107,19 @@
 
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/cep-promise/dist/cep-promise.min.js"></script>
+    <script>
+        var zipcode = document.getElementById("id_zipcode");
+
+        zipcode.onblur = function() {
+            var address = document.getElementById("id_address");
+
+            cep(this.value).then(function (data) {
+                address.value = data.street;
+            });
+        };
+    </script>
 {% endblock %}

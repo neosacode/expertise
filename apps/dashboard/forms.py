@@ -5,14 +5,16 @@ from apps.core.models import Analyze
 class AnalyseForm(forms.ModelForm):
     class Meta:
         model = Analyze
-        fields = ['zipcode', 'address', 'number', 'registration_number', 'block', 'lot']
+        fields = ['zipcode', 'address', 'number', 'registration_number', 'block', 'lot', 'type', 'complement']
         widgets = {
-            'zipcode': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '00.000-000'}),
-            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Rua de exemplo'}),
-            'number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '00'}),
-            'registration_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '000000'}),
-            'block': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '0000'}),
-            'lot': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '0000'}),
+            'zipcode': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Código postal'}),
+            'address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Não coloque cidade e estado'}),
+            'number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Coloque 0 se não existir'}),
+            'registration_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apenas números'}),
+            'block': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apenas números'}),
+            'lot': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Apenas números'}),
+            'complement': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Insira informações complementares do imóvel'}),
+            'type': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):

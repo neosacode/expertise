@@ -41,6 +41,7 @@
             <th><i class="fas fa-file-invoice"></i> Matrícula</th>
             <th><i class="fas fa-file-invoice"></i> Quadra</th>
             <th><i class="fas fa-file-invoice"></i> Lote</th>
+            <th><i class="fas fa-file-invoice"></i> Tipo</th>
             <th><i class="fas fa-thermometer-quarter"></i> Situação</th>
         </thead>
         <tbody class="fs-14 text-right">
@@ -53,7 +54,8 @@
                     <td>{{ analyze.registration_number|default_if_none:"N/D" }}</td>
                     <td>{{ analyze.block|default_if_none:"N/D" }}</td>
                     <td>{{ analyze.lot|default_if_none:"N/D" }}</td>
-                    <td><h6 class="m-0"><span class="badge badge-info">{{ analyze.state_display }}</span></h6></td>
+                    <td>{{ analyze.type }}</td>
+                    <td><h6 class="m-0"><span class="badge {{ analyze.state_badge_class }}">{{ analyze.state_display }}</span></h6></td>
                 </tr>
             {% endfor %}
         </tbody>

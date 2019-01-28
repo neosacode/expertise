@@ -59,7 +59,13 @@ class Analyze(BaseModel, TimeStampedModel):
     STATES = Choices(
         ('requested', 'requested', _("Requested")),
         ('registration_found', 'registration_found', _("Regisration found")),
-        ('analyzed', 'analyzed', _("Analyzed"))
+        ('analyzed', 'analyzed', _("Perished"))
+    )
+    TYPES = Choices(
+        ('apartment', 'apartment', _("Apartment")),
+        ('house', 'house', _("House")),
+        ('ground', 'ground', _("Ground")),
+        ('site', 'site', _("Site"))
     )
 
     state = models.CharField(max_length=30, choices=STATES, default=STATES.requested, verbose_name=_("State"))
@@ -71,6 +77,8 @@ class Analyze(BaseModel, TimeStampedModel):
     lot = models.CharField(max_length=20, null=True, verbose_name=_("Lot"))
     registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Registration Number"))
     registration = models.FileField(null=True, verbose_name=_("Registration"))
+    type = models.CharField(max_length=30, choices=TYPES, default=TYPES.house, verbose_name=_("Type"))
+    complement = models.CharField(max_length=100, verbose_name=_("complement"), null=True, blank=True)
 
     @property
     def code(self):
@@ -80,6 +88,15 @@ class Analyze(BaseModel, TimeStampedModel):
     def state_display(self):
         state = self.STATES.for_constant(self.state)
         return state.display
+
+    @property
+    def state_badge_class(self):
+        if self.state == 'requested':
+            return 'badge-info'
+        if self.state == 'registration_found':
+            return 'badge-warning'
+        if self.state == 'analyzed':
+            return 'badge-success'
 
     def __str__(self):
         return self.user.email if self.user else 'N/A'
