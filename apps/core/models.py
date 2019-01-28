@@ -86,7 +86,7 @@ class Analyze(BaseModel, TimeStampedModel):
 
     @property
     def type_display(self):
-        _ = self.STATES.for_constant(self.type)
+        _ = self.TYPES.for_constant(self.type)
         return _.display
 
     @property
