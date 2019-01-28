@@ -76,6 +76,11 @@ class Analyze(BaseModel, TimeStampedModel):
     def code(self):
         return self.id.hex[:10]
 
+    @property
+    def state_display(self):
+        state = self.STATES.for_constant(self.state)
+        return state.display
+
     def __str__(self):
         return self.user.email if self.user else 'N/A'
 
