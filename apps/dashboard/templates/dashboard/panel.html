@@ -1,9 +1,9 @@
 {% extends "dashboard/base.html" %}
 
-{% block page_name %}PAINEL{% endblock %}
+{% block page_name %}PERÍCIAS{% endblock %}
 
 {% block content %}
-    <h5 class="text-uppercase font-weight-bold mt-5">Suas Análises</h5>
+    <h5 class="text-uppercase font-weight-bold mt-5">Pesquisar</h5>
 
     <div class="row">
         <div class="col-md-6">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
-                            <input type="text" class="form-control fs-14" placeholder="Pesquise por matrícula, endereço ou quadra e lote" name="s" value="{{ s }}">
+                            <input type="text" class="form-control" placeholder="Pesquise por matrícula, endereço ou quadra e lote" name="s" value="{{ s }}">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -25,7 +25,9 @@
         </div>
         <div class="col-md-6">
             <div class="float-right">
-                <a href="{% url "dashboard:new-analyze" %}" class="btn btn-warning btn-sm"><i class="fas fa-plus"></i> NOVA ANÁLISE</a>
+                <img class="mr-3" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjEyOHB4IiBoZWlnaHQ9IjEyOHB4IiB2aWV3Qm94PSIwIDAgMzcwLjM1MyAzNzAuMzUzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAzNzAuMzUzIDM3MC4zNTM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8cGF0aCBkPSJNMzY4LjQzMiwxNjYuNTc4Yy0yMy4yNTYtMTkuNTg0LTQyLjg0LTQyLjg0LTYzLjY0OC02NC44NzJjLTExLjAxNi0xMS42MjgtMjguMTUxLTM0Ljg4NC00Ni41MTItMzYuMTA4ICAgYy0xLjIyNC0xLjgzNi0zLjA2LTMuMDYtNy4zNDQtMi40NDhjLTIuNDQ4LDAuNjEyLTQuMjg0LDIuNDQ4LTQuODk2LDQuODk2Yy0zLjY3MiwxNC4wNzYtMy4wNiwyOC43NjQtMy4wNiw0My40NTIgICBjLTUzLjg1Ni03LjM0NC0xMTYuODkzLDE5LjU4NC0xNTkuNzMyLDQ4LjM0OEMzNi4xMTUsMTkxLjA1Ny0wLjYwNSwyNDMuMDc4LDAuMDA3LDMwMS4yMTdjMCwyLjQ0OCwxLjgzNiwzLjY3MiwzLjY3Miw0LjI4NCAgIGMxLjgzNiwxLjgzNiw0LjI4NCwyLjQ0OCw2LjczMiwxLjIyNGM3MC45OTItNTAuMTg0LDE0NS4wNDQtOTQuMjQ3LDIzNS4wMDktNzguOTQ3aDAuNjExYy01LjUwOCwxNy43NDgtNi4xMTksMzcuOTQzLTYuMTE5LDU2LjMwNCAgIGMwLDUuNTA4LDQuODk2LDcuMzQ0LDguNTY3LDYuNzMyYzEuODM2LDIuNDQ3LDYuMTIsNC4yODMsOS4xOCwxLjIyNGM0MC4zOTMtMzMuNjYsODQuNDU2LTcxLjYwNCwxMTEuMzg1LTExNy41MDMgICBDMzcwLjg4LDE3Mi42OTgsMzcwLjg4LDE2OC40MTQsMzY4LjQzMiwxNjYuNTc4eiBNMzQ4LjIzNSwxODMuMTAyYy0xMC40MDMsMTUuMy0yMy44NjgsMjguNzY0LTM3LjMzMiw0Mi4yMjggICBjLTE4LjM1OSwxOC4zNi0zOS4xNjgsMzQuMjcyLTU2LjkxNiw1My4yNDRjMC0xNi41MjQtMC42MTEtMzMuMDQ4LDAuNjEyLTUwLjE4NWMwLTEuODM2LTAuNjEyLTMuMDYtMS44MzYtMy42NzIgICBjMS44MzYtMy42NzIsMS4yMjQtOC41NjctMy42NzItOS43OTJjLTg4Ljc0MS0xOC45NzItMTcwLjc0OSwyMy4yNTYtMjM5LjI5Miw3Ny4xMTJjOS4xOC01My44NTYsNDEuMDA0LTk0LjI0OCw4Ni45MDQtMTI0Ljg0OCAgIHM5My42MzctMzYuNzIsMTQ2LjI2OS00Mi44NHYwLjYxMmMtMC42MTIsNC44OTYsNy4zNDQsNS41MDgsOC41NjgsMS4yMjRjMC0xLjIyNCwwLjYxMS0xLjgzNiwwLjYxMS0zLjA2ICAgYzMuNjcyLTEuODM2LDQuODk2LTYuNzMyLDEuODM2LTguNTY4YzEuODM2LTkuNzkyLDIuNDQ4LTE5LjU4NCwzLjY3Mi0yOS4zNzZjMC0xLjgzNiwwLjYxMi00Ljg5NiwxLjIyNS03Ljk1NiAgIGM3Ljk1NiwxMC40MDQsMjEuNDIsMTkuNTg0LDMwLjYsMjguNzY0YzE3Ljc0OCwxOC4zNiwzNC4yNzIsMzcuOTQ0LDUyLjYzMiw1Ni4zMDQgICBDMzUxLjkwNywxNzAuODYyLDM1Ni4xOTEsMTcwLjg2MiwzNDguMjM1LDE4My4xMDJ6IiBmaWxsPSIjMDAwMDAwIi8+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==" width="70" />
+                <a href="{% url "dashboard:new-analyze" %}" class="btn btn-warning"><i class="fas fa-plus"></i>
+                <strong class="text-uppercase">Solicitar Perícia</strong></a>
             </div>
         </div>
     </div>
