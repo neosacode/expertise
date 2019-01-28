@@ -85,6 +85,11 @@ class Analyze(BaseModel, TimeStampedModel):
         return self.id.hex[:10]
 
     @property
+    def type_display(self):
+        _ = self.STATES.for_constant(self.type)
+        return _.display
+
+    @property
     def state_display(self):
         state = self.STATES.for_constant(self.state)
         return state.display

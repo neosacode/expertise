@@ -54,7 +54,7 @@
                     <td>{{ analyze.registration_number|default_if_none:"N/D" }}</td>
                     <td>{{ analyze.block|default_if_none:"N/D" }}</td>
                     <td>{{ analyze.lot|default_if_none:"N/D" }}</td>
-                    <td>{{ analyze.type }}</td>
+                    <td>{{ analyze.type_display }}</td>
                     <td><h6 class="m-0"><span class="badge {{ analyze.state_badge_class }}">{{ analyze.state_display }}</span></h6></td>
                 </tr>
             {% endfor %}
