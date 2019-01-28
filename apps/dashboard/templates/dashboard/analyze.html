@@ -3,7 +3,7 @@
 
 {% block page_name %}
     {% if analyze %}
-        ANÁLISE {{ analyze.code }}
+        PERÍCIA {{ analyze.code }}
     {% endif %}
 
 {% endblock %}
@@ -34,9 +34,9 @@
         <div class="col-md-6">
             {% if analyze.state != 'analyzed' %}
                 <div class="alert mt-3 alert-warning shadow-sm">
-                    <strong>Análise em andamento, aguarde... <i class="fas fa-clock"></i></strong><br>
+                    <strong>Perícia em andamento, aguarde... <i class="fas fa-clock"></i></strong><br>
                     <hr>
-                    Sua análise é feita normalmente em até 24 horas. Dependendo das datas festivas e dos cartórios, esse prazo pode aumentar para até 5 dias úteis.
+                    Sua perícia é feita normalmente em até 24 horas. Dependendo das datas festivas e dos cartórios, esse prazo pode aumentar para até 5 dias úteis.
                 </div>
             {% else %}
                 <ul class="checklist-real-estate mt-3">
