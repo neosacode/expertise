@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from apps.core.models import User
 
 
@@ -19,20 +20,35 @@ class ModelFormCustom(forms.ModelForm):
 class UserForm(ModelFormCustom):
     class Meta:
         model = User
-        fields = ['type', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['type', 'first_name', 'email', 'password', 'whatsapp', 'document']
         widgets = {
             'password': forms.PasswordInput()
         }
         custom_attrs = {
             'type': {'class': 'form-control'},
-            'username': {'class': 'form-control'},
             'email': {'class': 'form-control'},
             'first_name': {'class': 'form-control'},
-            'last_name': {'class': 'form-control'},
+            'whatsapp': {'class': 'form-control'},
+            'document': {'class': 'form-control'},
             'password': {'class': 'form-control'},
         }
         required_fields = [
             'email',
             'first_name',
-            'last_name',
+            'password',
         ]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        signup_type = cleaned_data.get('type')
+        whatsapp = cleaned_data.get('whatsapp')
+        document = cleaned_data.get('document')
+
+        if signup_type != User.TYPE_CHOICES[1][0]:
+            return
+
+        if not whatsapp:
+            self.add_error('whatsapp', _('This field is required'))
+
+        if not document:
+            self.add_error('document', _('This field is required'))

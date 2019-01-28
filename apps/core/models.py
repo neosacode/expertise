@@ -17,12 +17,18 @@ class BaseModel(models.Model):
 
 
 class User(AbstractUser, BaseModel):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
     TYPE_CHOICES = (
         ('owner', 'Proprietário'),
         ('real_estate', 'Imobiliária')
     )
 
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=TYPE_CHOICES[0][0], verbose_name='Qual o seu perfil?')
+    whatsapp = models.CharField(max_length=20, verbose_name='WhatsApp', null=True, blank=True)
+    document = models.CharField(max_length=20, verbose_name='CPF ou CNPJ', null=True, blank=True)
+    email = models.EmailField(unique=True)
 
     class Meta:
         verbose_name = _("User")
