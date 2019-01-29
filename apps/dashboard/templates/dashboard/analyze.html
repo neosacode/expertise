@@ -48,19 +48,36 @@
                                 <i class="fas fa-times-circle float-right fs-30"></i>
                             {% endif %}
 
-                            {{ report.indicator.name }}<br>
+                            <small>{{ report.indicator.name }}</small><br>
 
                             {% if report.observation %}
-                                <small>{{ report.observation }}</small>
+                                {{ report.observation }}
                             {% elif report.indicator.observation_ok and report.state == 'ok' %}
-                                <small>{{ report.indicator.observation_ok }}</small>
+                                {{ report.indicator.observation_ok }}
                             {% elif report.indicator.observation_not_ok and report.state == 'not_ok' %}
-                                <small>{{ report.indicator.observation_not_ok }}</small>
+                                {{ report.indicator.observation_not_ok }}
                             {% endif %}
+
+                            <a href="#" class="indicator-details-link" data-toggle="tooltip" data-placement="top" title="Mais informações" onclick="return false;"><span style="display: block; height: 100%;"  data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{ report.indicator.description }}"><i class="fas fa-question-circle"></i> <br>.<br>.</span></a>
                         </li>
                     {% endfor %}
                 </ul>
             {% endif %}
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover();
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $(document).on('focus', ':not(.popover)', function(){
+            $('.popover').popover('hide');
+            $('.tooltip').tooltip('hide')
+        });
+
+    });
+    </script>
 {% endblock %}

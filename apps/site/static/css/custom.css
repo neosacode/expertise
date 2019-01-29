@@ -151,9 +151,13 @@ body {
 	padding: 0;
 }
 
+.checklist-real-estate li {
+	position: relative;
+}
+
 .checklist-real-estate li.ok {
 	background-color: #FAFAFA;
-	padding: 20px 40px;
+	padding: 20px 40px 20px 60px;
 	margin-bottom: 20px;
 	color: #327d32;
 	font-weight: bold;
@@ -163,6 +167,33 @@ body {
 	background-color: #FAFAFA;
 	color: #ff5719;
 	font-weight: bold;
-	padding: 20px 40px;
+	padding: 20px 40px 20px 60px;
 	margin-bottom: 20px;
+}
+
+.popover-body {
+    color: black;
+    font-size: 16px;
+}
+
+.indicator-details-link {
+	display: block;
+	position: absolute;
+	height: 100%;
+	left: 0;
+	border-radius: 3px;
+	bottom: 0;
+	background-color: #d6d6d6;
+	color: black !important;
+	text-align: center;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 12px;
+	margin: 0 auto;
+}
+
+.indicator-details-link:hover {
+	text-decoration: none;
 }
