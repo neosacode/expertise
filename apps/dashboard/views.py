@@ -2,14 +2,14 @@ from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.views import LoginView, logout_then_login
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib import messages
+from django.conf import settings
+from templated_email import send_templated_mail
 from apps.core.models import Analyze, Report
 from apps.core.forms import UserForm
 from apps.dashboard.forms import AnalyseForm
@@ -86,7 +86,16 @@ class AnalyseFormView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         messages.success(self.request, 'Solicitação de análise efetuada com sucesso!')
-        return super().form_valid(form)
+        response = super().form_valid(form)
+
+        send_templated_mail(
+            template_name='new-analyse',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[self.request.user.email],
+            context={'analyze': form.instance}
+        )
+
+        return response
 
 
 @method_decorator(login_required, name='dispatch')

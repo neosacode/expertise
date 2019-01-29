@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'model_utils',
     'cities_light',
+    'anymail',
 
     # Local apps
     'apps.core',
@@ -170,3 +171,11 @@ SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=config.b
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+# E-mail
+ANYMAIL = {
+    "MAILGUN_API_KEY": config('MAILGUN_API_KEY'),
+    "MAILGUN_SENDER_DOMAIN": config('MAILGUN_SENDER_DOMAIN'),
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')

@@ -126,7 +126,7 @@ class Report(BaseModel, TimeStampedModel):
 
     analyse = models.ForeignKey(Analyze, verbose_name=_("Analyse"), on_delete=models.CASCADE)
     indicator = models.ForeignKey(Indicator, verbose_name=_("Indicator"), on_delete=models.CASCADE, null=True)
-    state = models.CharField(max_length=30, choices=STATES, verbose_name=_("State"))
+    state = models.CharField(max_length=30, choices=STATES, verbose_name=_("State"), null=True, blank=True  )
     observation = models.CharField(max_length=100, verbose_name=_("Observation"), null=True, blank=True)
 
     def __str__(self):

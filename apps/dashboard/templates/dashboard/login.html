@@ -144,7 +144,7 @@
                 {% csrf_token %}
 
               <div class="form-label-group">
-                <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Usuário ou e-mail" value="{{ form.username.value|default_if_none:"" }}" required autofocus>
+                <input type="text" name="username" id="inputEmail" class="form-control" placeholder="E-mail" value="{{ form.username.value|default_if_none:"" }}" required autofocus>
                 <label for="inputEmail">Usuário ou e-mail</label>
                   {% for error in form.username.errors %}
                       <small><strong class="text-danger">{{ error }}</strong></small>
