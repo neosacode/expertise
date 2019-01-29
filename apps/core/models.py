@@ -1,10 +1,10 @@
 import uuid
 
 from django.db import models
-from django.contrib.gis.db.models import PointField
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from cities_light.models import Region, City
+from model_utils import FieldTracker
 from model_utils.models import TimeStampedModel
 from extended_choices import Choices
 
@@ -85,10 +85,15 @@ class Analyze(BaseModel, TimeStampedModel):
     registration = models.FileField(null=True, verbose_name=_("Registration"))
     type = models.CharField(max_length=30, choices=TYPES, default=TYPES.house, verbose_name=_("Type"))
     complement = models.CharField(max_length=100, verbose_name=_("complement"), null=True, blank=True)
+    tracker = FieldTracker()
 
     @property
     def code(self):
         return self.id.hex[:10]
+
+    @property
+    def is_analyzed(self):
+        return self.state == self.STATES.analyzed
 
     @property
     def type_display(self):

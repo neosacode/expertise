@@ -45,11 +45,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label>Endereço com cidade e estado *</label>
+                            <label>Endereço *</label>
                             {{ form.address }}
                             {% for error in form.address.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
-                          {% endfor %}
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-lg-3">
