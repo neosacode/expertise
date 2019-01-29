@@ -197,3 +197,7 @@ body {
 .indicator-details-link:hover {
 	text-decoration: none;
 }
+
+small {
+	font-style: 90% !important;
+}
