@@ -12,17 +12,54 @@
 		Enviaremos por e-mail, um resumo neste formato do que foi encontrado referente ao imóvel avaliado
 	</p>
 
-	<ul class="checklist-real-estate">
-		<li class="ok">Hipoteca <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="ok">Penhora <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="ok">Alienação <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="not-ok">Indisponibilidade de Bens <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="ok">Dívidas <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="not-ok">Dívida Trabalhista <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="ok">Dívida Estadual <i class="fa fa-check-circle float-right fs-30"></i></li>
-		<li class="ok">Dívida Federal <i class="fa fa-check-circle float-right fs-30"></i></li>
-	</ul>
+	<ul class="checklist-real-estate mt-3">
+        {% for report in reports %}
+            <li class="{% if report.state == 'ok' %}ok{% else %}not-ok{% endif %}" data-toggle="popover" data-container="body" data-placement="top" data-content="{{ report.indicator.description }}">
+                {% if report.state == 'ok' %}
+                    <i class="fa fa-check-circle float-right fs-30"></i>
+                {% else %}
+                    <i class="fas fa-times-circle float-right fs-30"></i>
+                {% endif %}
+
+                <small>{{ report.indicator.name }}</small><br>
+
+                {% if report.observation %}
+                    {{ report.observation }}
+                {% elif report.indicator.observation_ok and report.state == 'ok' %}
+                    {{ report.indicator.observation_ok }}
+                {% elif report.indicator.observation_not_ok and report.state == 'not_ok' %}
+                    {{ report.indicator.observation_not_ok }}
+                {% endif %}
+
+                <a href="#" class="indicator-details-link" data-toggle="tooltip" data-placement="top" title="Mais informações"><span style="display: block; height: 100%;"><i class="fas fa-question-circle"></i> <br>.<br>.</span></a>
+            </li>
+        {% endfor %}
+    </ul>
 
     <a href="{% url "dashboard:signup" %}" class="btn btn-primary mt-5 text-uppercase fs-16 ff-poppins font-weight-bold">Solicitar Análise <i class="fas fa-arrow-right"></i></a>
 
+{% endblock %}
+
+{% block js %}
+    <script>
+    $(function () {
+      $('[data-toggle="popover"]').popover();
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $(document).on('focus', ':not(.popover)', function(){
+        $('.popover').popover('hide');
+        $('.tooltip').tooltip('hide');
+    });
+
+      $('[data-toggle=popover]').on('click', function (e) {
+           $('[data-toggle=popover]').not(this).popover('hide');
+        });
+
+      $('.indicator-details-link').on('click', function (e) {
+          e.preventDefault();
+          $(this).closest('li').popover('show');
+      });
+
+    });
+    </script>
 {% endblock %}

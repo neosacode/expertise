@@ -15,51 +15,13 @@
 	</p>
 
 	<div class="row mt-5">
-		<div class="col-md-3">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Hipoteca
-			</a>
-		</div>
-		<div class="col-md-3">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Penhora
-			</a>
-		</div>
-		<div class="col-md-6">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Indisponibilidade de Bens
-			</a>
-		</div>
-		<div class="col-md-6">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Certidão trabalhista
-			</a>
-		</div>
-		<div class="col-md-3">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Dívidas
-			</a>
-		</div>
-		<div class="col-md-3">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Alienação
-			</a>
-		</div>
-		<div class="col-md-12">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Confirmação do proprietário informado
-			</a>
-		</div>
-		<div class="col-md-6">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Certidão Estadual
-			</a>
-		</div>
-		<div class="col-md-6">
-			<a href="#" data-toggle="modal" data-target="#itemmodal" class="item-tag">
-				Certidão Federal
-			</a>
-		</div>
+		{% for indicator in indicators %}
+            <div class="col-md-4">
+                <a data-toggle="modal" data-target="#itemmodal" class="item-tag text-primary">
+                    {{ indicator.name }}
+                </a>
+            </div>
+        {% endfor %}
 	</div>
 
     <a href="{% url "site:example" %}" class="btn btn-primary mt-5 text-uppercase fs-16 ff-poppins font-weight-bold">Ver Exemplo <i class="fas fa-arrow-right"></i></a>

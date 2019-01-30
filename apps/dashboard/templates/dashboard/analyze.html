@@ -76,7 +76,9 @@
       $(document).on('focus', ':not(.popover)', function(){
         $('.popover').popover('hide');
         $('.tooltip').tooltip('hide');
-    });
+      });
+
+      $('.checklist-real-estate li').popover('show');
 
       $('[data-toggle=popover]').on('click', function (e) {
            $('[data-toggle=popover]').not(this).popover('hide');

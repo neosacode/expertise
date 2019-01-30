@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from apps.core.models import Indicator, Report, Analyze
 
 
 class HomeView(TemplateView):
@@ -7,6 +8,11 @@ class HomeView(TemplateView):
 
 class HowItWorksView(TemplateView):
     template_name = 'site/how-it-works.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['indicators'] = Indicator.objects.all()
+        return context
 
 
 class Step1View(TemplateView):
@@ -27,3 +33,9 @@ class PlansView(TemplateView):
 
 class ExampleView(TemplateView):
     template_name = 'site/example.html'
+
+    def get_context_data(self, **kwargs):
+        analyze = Analyze.objects.filter(state=Analyze.STATES.analyzed).order_by('created').first()
+        context = super().get_context_data()
+        context['reports'] = Report.objects.filter(analyse=analyze)
+        return context
