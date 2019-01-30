@@ -11,10 +11,16 @@ from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from templated_email import send_templated_mail
+from pagseguro import PagSeguro
 from apps.core.models import Analyze, Report, Account
 from apps.core.forms import UserForm
 from apps.dashboard.forms import AnalyseForm
+
+
+pg = PagSeguro(email="esabadini@yahoo.com", token="31E3149BE6E246428498561D5D261021")
 
 
 @method_decorator(login_required, name='dispatch')
@@ -132,8 +138,6 @@ class CreatePaymentView(View):
         if amount < 52.90:
             return
 
-        from pagseguro import PagSeguro
-        pg = PagSeguro(email="esabadini@yahoo.com", token="31E3149BE6E246428498561D5D261021")
         pg.sender = {
             "name": 'Juliano Gouveia',
             "email": request.user.email,
@@ -150,5 +154,26 @@ class CreatePaymentView(View):
             "state": "PR",
             "country": "BRA"
         }
+        pg.reference_prefix = None
+        pg.reference = request.user.email
+
         response = pg.checkout()
         return JsonResponse({'code': response.code})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class PagseguroNotification(View):
+    STATUS_PAGO = 3
+
+    def post(self):
+        notification_code = request.POST['notificationCode']
+        notification_data = pg.check_notification(notification_code)
+
+        if notification_data['status'] == self.STATUS_PAGO:
+            user = Users.objects.get(email=notification_data['reference'])
+            account = Account.objects.get(user=user)
+            account.credit += Decimal(notification_data['grossAmount'])
+            return JsonResponse({'status': 'Payment processed!'})
+
+        return JsonResponse({'status': 'Nothing done!'})
+
