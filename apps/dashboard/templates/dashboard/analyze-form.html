@@ -21,6 +21,18 @@
                 <small class="text-danger">Buscamos automáticamente a cidade e estado a partir de seu CEP, portanto não erre.</small><br>
             </p>
 
+            {% if account.credit < account.request_price %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="rounded-0 mt-3 alert alert-warning">
+                            <p class="mt-3 float-left"><i class="fas fa-exclamation-triangle"></i> Sua conta não possui créditos suficiente para solicitar uma nova perícia.</p>
+                            <a href="{% url "dashboard:credit" %}" class="btn btn-warning btn-sm shadow float-right"><i class="fas fa-coins"></i> Adicionar Créditos</a>
+                        <div class="clearfix"></div></div>
+                    </div>
+                </div>
+                <hr>
+            {% endif %}
+
             <form method="post" novalidate>
                 {% csrf_token %}
                 <div class="row">
@@ -98,7 +110,11 @@
                     </div>
                 </div>
 
-                <p class="mt-3 mb-0"><small>Verifique se os dados estão corretos antes de solicitar a perícia</small></p> <button type="submit" class="btn float-right btn-primary btn-sm shadow">SOLICITAR PERÍCIA</button>
+                <p class="mt-3 mb-0"><small>Verifique se os dados estão corretos antes de solicitar a perícia</small></p>
+
+                {% if account.credit >= account.request_price %}
+                    <button type="submit" class="btn float-right btn-primary btn-sm shadow">SOLICITAR PERÍCIA</button>
+                {% endif %}
             </form>
         </div>
 

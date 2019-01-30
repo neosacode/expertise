@@ -88,6 +88,11 @@ class AnalyseFormView(CreateView):
     model = Analyze
     form_class = AnalyseForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['account'] = Account.objects.filter(user=self.request.user).first()
+        return context
+
     def get_success_url(self):
         return reverse('dashboard:panel')
 
