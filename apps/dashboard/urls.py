@@ -11,4 +11,5 @@ urlpatterns = [
     path('new-analyze', views.AnalyseFormView.as_view(), name='new-analyze'),
     path('follow-analyze', views.AnalyseView.as_view(), name='follow-analyze'),
     path('create-payment', views.CreatePaymentView.as_view(), name='create-payment'),
+    path('pagseguro-notification', views.PagseguroNotification.as_view(), name='pagseguro-notification'),
 ]
