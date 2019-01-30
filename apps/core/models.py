@@ -42,7 +42,7 @@ class Indicator(BaseModel, TimeStampedModel):
     observation_not_ok = models.CharField(max_length=100, verbose_name=_("Not Ok Observation"), null=True, blank=True)
 
     def __str__(self):
-        return '{}-{}'.format(self.name, self.email)
+        return '{} - {}'.format(self.name, self.email)
 
     class Meta:
         verbose_name = _("Indicator")
