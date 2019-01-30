@@ -52,4 +52,5 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['user__email', 'user__username', 'user__document', 'user__whatsapp']
+    list_display = ['user', 'credit', 'credit_used', 'request_price']
