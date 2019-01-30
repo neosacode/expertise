@@ -10,7 +10,7 @@ from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
 from templated_email import send_templated_mail
-from apps.core.models import Analyze, Report
+from apps.core.models import Analyze, Report, Account
 from apps.core.forms import UserForm
 from apps.dashboard.forms import AnalyseForm
 
@@ -73,6 +73,11 @@ class LogoutView(View):
 class CreditView(TemplateView):
     template_name = 'dashboard/credit.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['account'] = Account.objects.filter(user=self.request.user).first()
+        return context
+
 
 @method_decorator(login_required, name='dispatch')
 class AnalyseFormView(CreateView):
@@ -109,3 +114,28 @@ class AnalyseView(TemplateView):
         data['analyze'] = analyse
         data['reports'] = Report.objects.filter(analyse=analyse)
         return data
+
+
+@method_decorator(login_required, name='dispatch')
+class CreatePaymentView(View):
+    def get(self, request):
+        from pagseguro import PagSeguro
+        pg = PagSeguro(email="esabadini@yahoo.com", token="31E3149BE6E246428498561D5D261021")
+        pg.sender = {
+            "name": 'Juliano Gouveia',
+            "email": request.user.email,
+        }
+        pg.add_item(id="0003", description="produto 4", amount=str('100.00'), quantity=1)
+        pg.shipping = {
+            "type": pg.NONE,
+            "street": "Av Brig Faria Lima",
+            "number": 1234,
+            "complement": "5 andar",
+            "district": "Jardim Paulistano",
+            "postal_code": "06650030",
+            "city": "Sao Paulo",
+            "state": "SP",
+            "country": "BRA"
+        }
+        response = pg.checkout()
+        return redirect(response.payment_url)

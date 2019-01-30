@@ -10,4 +10,5 @@ urlpatterns = [
     path('credit', views.CreditView.as_view(), name='credit'),
     path('new-analyze', views.AnalyseFormView.as_view(), name='new-analyze'),
     path('follow-analyze', views.AnalyseView.as_view(), name='follow-analyze'),
+    path('create-payment', views.CreatePaymentView.as_view(), name='create-payment'),
 ]

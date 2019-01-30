@@ -1,5 +1,5 @@
 import uuid
-
+from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
@@ -125,8 +125,7 @@ class Analyze(BaseModel, TimeStampedModel):
 class Report(BaseModel, TimeStampedModel):
     STATES = Choices(
         ('ok', 'ok', _("Ok")),
-        ('not_ok', 'not_ok', _("Not Ok")),
-        ('not_analyzed', 'not_analyzed', _("Not Analyzed")),
+        ('not_ok', 'not_ok', _("Not Ok"))
     )
 
     analyse = models.ForeignKey(Analyze, verbose_name=_("Analyse"), on_delete=models.CASCADE)
@@ -143,10 +142,10 @@ class Report(BaseModel, TimeStampedModel):
 
 
 class Account(BaseModel, TimeStampedModel):
-    user = models.ForeignKey(User, verbose_name=_("User"), on_delete=models.CASCADE)
-    credit = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit available for new requests"))
-    credit_used = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit used"))
-    requests = models.IntegerField(verbose_name=_("Requests available for free"))
+    user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE)
+    credit = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit available for new requests"), default=Decimal('0'))
+    credit_used = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit used"), default=Decimal('0'))
+    requests = models.IntegerField(verbose_name=_("Requests available for free"), default=0)
 
     class Meta:
         verbose_name = _("Account")

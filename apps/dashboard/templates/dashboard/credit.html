@@ -3,38 +3,68 @@
 {% block page_name %}CRÉDITOS{% endblock %}
 
 {% block content %}
+    <p>Aqui você acompanha o status financeiro da sua conta. Realize suas recargas e comece a usar.</p>
+
     <hr>
 
-    <div class="row mt-5">
+    <div class="row mt-4">
         <div class="col-md-6">
-            <h1>R$ 0,00</h1>
-            <p>Por motivos de segurança, usamos Pagseguro como meio de pagamento, por favor, clique no botão para colocar créditos.</p>
+            <small>Seu saldo atual em Reais é de:</small>
+            <h1><strong>{{ account.credit|floatformat:2 }}</strong></h1>
 
-            <div class="alert alert-danger fs-14">
-                <p class="mb-1"><i class="fas fa-credit-card"></i> Pagamentos feitos através de cartão de crédito, são processados no mesmo instante em sua conta.</p>
-                <p class="mb-0"><i class="fas fa-barcode"></i> Pagamentos feitos através de boleto bancário, são processados no mesmo instante em sua conta.</p>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="number" class="form-control form-control-lg mb-4" value="52.90" step="1">
+                </div>
+                <div class="col-md-8">
+                    <p class="mt-3"><small>Digite o valor em Reais que deseja adicionar de crédito a sua conta.</small></p>
+                </div>
             </div>
 
-            <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
-            <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+
+
+            <div class="alert alert-danger fs-14 rounded-0">
+                <p class="mb-1"><i class="fas fa-coins"></i> O valor minímo de crédito que pode ser adicionado a sua conta é de R$ 52,90.</p>
+                <p class="mb-1"><i class="fas fa-credit-card"></i> Pagamentos feitos através de cartão de crédito, são processados no mesmo instante em sua conta.</p>
+                <p class="mb-0"><i class="fas fa-barcode"></i> Pagamentos feitos através de boleto bancário, podem levar até 3 dias úteis.</p>
+            </div>
+
+            <p><small>Por motivos de segurança, usamos Pagseguro como meio de pagamento, por favor, clique no botão para colocar créditos.</small></p>
+
+            <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" s method="post" onsubmit="PagSeguroLightbox(this); return false;">
                 <input type="hidden" name="code" value="B5923D3CD4D4340FF4B67FB80BD70356" />
                 <input type="hidden" name="iot" value="button" />
-                <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/209x48-pagar-azul-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                <div>
+                    <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/209x48-pagar-azul-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                </div>
             </form>
             <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
-            <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
         </div>
         <div class="col-md-6">
-            <h4 class="mb-3"><i class="fas fa-history"></i> HISTÓRICO</h4>
+            <h5 class="mb-3"><i class="fas fa-history"></i> HISTÓRICO</h5>
 
-            <table class="table shadow">
+            <p><small>Suas faturas aparecem aqui, você pode acompanhar todo o histórico de valores creditados para organizar as finanças.</small></p>
+
+            <table class="table shadow-sm table-bordered">
                 <thead>
-                    <tr class="fs-14">
+                    <tr class="fs-12">
                         <th>DATA COMPENSAÇÃO</th>
                         <th>VALOR</th>
                     </tr>
                 </thead>
             </table>
+
+
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        jQuery(function ($) {
+            
+        });
+    </script>
 {% endblock %}
