@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.views import LoginView, logout_then_login
@@ -6,6 +7,7 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
@@ -118,24 +120,29 @@ class AnalyseView(TemplateView):
 
 @method_decorator(login_required, name='dispatch')
 class CreatePaymentView(View):
-    def get(self, request):
+    def post(self, request):
+        amount = round(Decimal(''.join(c for c in request.POST['amount'] if c.isdigit() or c == '.')), 2)
+
+        if amount < 52.90:
+            return
+
         from pagseguro import PagSeguro
         pg = PagSeguro(email="esabadini@yahoo.com", token="31E3149BE6E246428498561D5D261021")
         pg.sender = {
             "name": 'Juliano Gouveia',
             "email": request.user.email,
         }
-        pg.add_item(id="0003", description="produto 4", amount=str('100.00'), quantity=1)
+        pg.add_item(id="0001", description="Crédito conta Imóvel Periciado", amount=str(amount), quantity=1)
         pg.shipping = {
             "type": pg.NONE,
-            "street": "Av Brig Faria Lima",
-            "number": 1234,
-            "complement": "5 andar",
-            "district": "Jardim Paulistano",
-            "postal_code": "06650030",
-            "city": "Sao Paulo",
-            "state": "SP",
+            "street": "AV Beira Mar 5",
+            "number": 2560,
+            "complement": "",
+            "district": "Pontal",
+            "postal_code": "89249000",
+            "city": "Itapoa",
+            "state": "PR",
             "country": "BRA"
         }
         response = pg.checkout()
-        return redirect(response.payment_url)
+        return JsonResponse({'code': response.code})

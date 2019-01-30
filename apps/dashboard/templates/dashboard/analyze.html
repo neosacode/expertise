@@ -23,9 +23,9 @@
                    CEP: <strong>{{ analyze.zipcode }}</strong><hr>
                    Endereço: <strong>{{ analyze.address }}</strong><hr>
                    Número: <strong>{{ analyze.number }}</strong><hr>
-                   Matrícula: <strong>{{ analyze.registration_number }}</strong><hr>
-                   Quadra: <strong>{{ analyze.block }}</strong><hr>
-                   Lote: <strong>{{ analyze.lot }}</strong>
+                   Matrícula: <strong>{{ analyze.registration_number|default:"N/D" }}</strong><hr>
+                   Quadra: <strong>{{ analyze.block|default:"N/D" }}</strong><hr>
+                   Lote: <strong>{{ analyze.lot|default:"N/D" }}</strong>
                 </div>
             </div>
 

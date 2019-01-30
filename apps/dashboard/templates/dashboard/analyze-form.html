@@ -1,18 +1,17 @@
 {% extends "dashboard/base.html" %}
 {% load static %}
 
-{% block page_name %}
-    {% if analyze %}
-        ACOMPANHANDO PERÍCIA
-    {% else %}
-        NOVA PERÍCIA
-    {% endif %}
-
-{% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="col-md-6">
+            <h1 class="ff-fjalla text-uppercase fs-64">
+                {% if analyze %}
+                    ACOMPANHANDO PERÍCIA
+                {% else %}
+                    NOVA PERÍCIA
+                {% endif %}
+            </h1>
+
             <p class="mb-4">Para que a perícia acontença, precisamos do máximo de informações referentes ao imóvel</p>
             <hr class="mb-4">
 
@@ -103,8 +102,8 @@
             </form>
         </div>
 
-        <div class="col-md-6">
-
+        <div class="col-md-6 text-right">
+            <img src="{% static "img/banner.png" %}" class="img-fluid">
         </div>
     </div>
 {% endblock %}
