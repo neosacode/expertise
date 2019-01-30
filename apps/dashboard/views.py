@@ -13,6 +13,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from templated_email import send_templated_mail
+from django.db import transaction
 from pagseguro import PagSeguro
 from apps.core.models import Analyze, Report, Account, User
 from apps.core.forms import UserForm
@@ -64,7 +65,11 @@ class SignupView(FormView):
         user.set_password(form.cleaned_data['password'])
         user.save()
         login(self.request, user)
-        return redirect(self.get_success_url())
+
+        if user.type == 'owner':
+            return redirect(self.get_success_url())
+
+        return redirect(reverse('dashboard:wait'))
 
     def get_success_url(self):
         messages.success(self.request, 'Bem vindo. Esta é o seu painel, fique a vontade e explore nossa ferramenta.')
@@ -88,6 +93,11 @@ class CreditView(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
+class WaitView(TemplateView):
+    template_name = 'dashboard/wait.html'
+
+
+@method_decorator(login_required, name='dispatch')
 class AnalyseFormView(CreateView):
     template_name = 'dashboard/analyze-form.html'
     model = Analyze
@@ -102,9 +112,14 @@ class AnalyseFormView(CreateView):
         return reverse('dashboard:panel')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        messages.success(self.request, 'Solicitação de análise efetuada com sucesso!')
-        response = super().form_valid(form)
+        with transaction.atomic():
+            form.instance.user = self.request.user
+            messages.success(self.request, 'Solicitação de análise efetuada com sucesso!')
+            response = super().form_valid(form)
+
+            account = Account.objects.filter(user=self.request.user).first()
+            account.credit -= account.request_price
+            account.save()
 
         send_templated_mail(
             template_name='new-analyse',
