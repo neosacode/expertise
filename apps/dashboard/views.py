@@ -4,7 +4,6 @@ from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.views import LoginView, logout_then_login
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.http import JsonResponse
@@ -15,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from templated_email import send_templated_mail
 from pagseguro import PagSeguro
-from apps.core.models import Analyze, Report, Account
+from apps.core.models import Analyze, Report, Account, User
 from apps.core.forms import UserForm
 from apps.dashboard.forms import AnalyseForm
 
@@ -142,6 +141,8 @@ class CreatePaymentView(View):
             "name": 'Juliano Gouveia',
             "email": request.user.email,
         }
+
+        pg.items = []
         pg.add_item(id="0001", description="Crédito conta Imóvel Periciado", amount=str(amount), quantity=1)
         pg.shipping = {
             "type": pg.NONE,
@@ -155,7 +156,7 @@ class CreatePaymentView(View):
             "country": "BRA"
         }
         pg.reference_prefix = None
-        pg.reference = request.user.email
+        pg.reference = str(request.user.pk)
 
         response = pg.checkout()
         return JsonResponse({'code': response.code})
@@ -170,7 +171,7 @@ class PagseguroNotification(View):
         notification_data = pg.check_notification(notification_code)
 
         if notification_data['status'] == self.STATUS_PAGO:
-            user = Users.objects.get(email=notification_data['reference'])
+            user = User.objects.get(pk=notification_data['reference'])
             account = Account.objects.get(user=user)
             account.credit += Decimal(notification_data['grossAmount'])
             return JsonResponse({'status': 'Payment processed!'})
