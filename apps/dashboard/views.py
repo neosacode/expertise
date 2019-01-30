@@ -56,6 +56,7 @@ class SignupView(FormView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.username = user.email
+        user.set_password(form.cleaned_data['password'])
         user.save()
         login(self.request, user)
         return redirect(self.get_success_url())
