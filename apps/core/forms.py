@@ -18,6 +18,8 @@ class ModelFormCustom(forms.ModelForm):
 
 
 class UserForm(ModelFormCustom):
+    first_name = forms.CharField(max_length=100, label='Nome completo')
+
     class Meta:
         model = User
         fields = ['type', 'first_name', 'email', 'password', 'whatsapp', 'document']

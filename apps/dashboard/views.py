@@ -153,7 +153,7 @@ class CreatePaymentView(View):
             return
 
         pg.sender = {
-            "name": 'Juliano Gouveia',
+            "name": request.user.first_name,
             "email": request.user.email,
         }
 
