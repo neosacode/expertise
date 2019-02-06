@@ -47,7 +47,7 @@ class ReportAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    fields = ('password',)
+    readonly_fields = ('password',)
 
 
 @admin.register(Account)
