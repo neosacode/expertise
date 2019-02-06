@@ -13,4 +13,4 @@ django-extended-choices
 django-anymail[mailgun]
 django-templated-email
 pagseguro
-iugu
+requests
