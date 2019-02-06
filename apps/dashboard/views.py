@@ -171,6 +171,8 @@ class CreatePaymentView(View):
                 'name': request.user.first_name,
                 'address.zip_code': request.user.zipcode,
                 'address.number': request.user.number,
+                'address.street': request.user.address,
+                'address.district': request.user.district,
             },
             'notification_url': 'https://imovelpericiado.com.br/dashboard/iugu-notification'
         }

@@ -47,7 +47,7 @@ class ReportAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    pass
+    fields = ('password',)
 
 
 @admin.register(Account)

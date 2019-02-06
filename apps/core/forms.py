@@ -35,6 +35,8 @@ class UserForm(ModelFormCustom):
             'password': {'class': 'form-control'},
             'zipcode': {'class': 'form-control'},
             'number': {'class': 'form-control'},
+            'address': {'class': 'form-control'},
+            'district': {'class': 'form-control'},
         }
         required_fields = [
             'email',
