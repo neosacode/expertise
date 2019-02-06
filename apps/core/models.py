@@ -7,6 +7,7 @@ from cities_light.models import Region, City
 from model_utils import FieldTracker
 from model_utils.models import TimeStampedModel
 from extended_choices import Choices
+from django.contrib.postgres.fields import JSONField
 
 
 class BaseModel(models.Model):
@@ -21,14 +22,16 @@ class User(AbstractUser, BaseModel):
     REQUIRED_FIELDS = []
 
     TYPE_CHOICES = (
-        ('owner', 'Proprietário'),
+        ('owner', 'Pessoa Física'),
         ('real_estate', 'Imobiliária')
     )
 
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=TYPE_CHOICES[0][0], verbose_name='Qual o seu perfil?')
     whatsapp = models.CharField(max_length=20, verbose_name='WhatsApp', null=True, blank=True)
-    document = models.CharField(max_length=20, verbose_name='CPF ou CNPJ', null=True, blank=True)
+    document = models.CharField(max_length=20, verbose_name='CPF ou CNPJ', null=True)
     email = models.EmailField(unique=True)
+    number = models.CharField(max_length=255, null=True, verbose_name=_("Número do seu Endereço"))
+    zipcode = models.CharField(max_length=10, null=True, verbose_name=_("CEP do seu Endereço"))
 
     class Meta:
         verbose_name = _("User")
@@ -147,9 +150,24 @@ class Account(BaseModel, TimeStampedModel):
     credit_used = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit used"), default=Decimal('0'))
     request_price = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Request price"), default=Decimal('52.90'))
     requests = models.IntegerField(verbose_name=_("Requests available for free"), default=0)
+    iugu_data = JSONField(verbose_name=_("Iugu Credit Card Data"), default=dict)
 
     class Meta:
         verbose_name = _("Account")
         verbose_name_plural = _("Accounts")
 
 
+class Charge(BaseModel, TimeStampedModel):
+    STATES = Choices(
+        ('created', 'created', _("Criada")),
+        ('paid', 'paid', _("Paga"))
+    )
+
+    amount = models.DecimalField(max_digits=10, decimal_places=4, default=Decimal('0'), verbose_name=_("Valor"))
+    user = models.ForeignKey('core.User', related_name='charges', on_delete=models.CASCADE, null=True)
+    ref = models.CharField(max_length=300, verbose_name=_("Valor"))
+    state = models.CharField(max_length=30, default=STATES.created)
+
+    class Meta:
+        verbose_name = _("Cobrança")
+        verbose_name_plural = _("Cobranças")

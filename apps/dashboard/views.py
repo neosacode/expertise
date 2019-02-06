@@ -1,3 +1,5 @@
+import requests
+from requests.auth import HTTPBasicAuth
 from decimal import Decimal
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, FormView
@@ -6,16 +8,16 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse
 from django.shortcuts import redirect
-from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib import messages
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from templated_email import send_templated_mail
 from django.db import transaction
 from pagseguro import PagSeguro
-from apps.core.models import Analyze, Report, Account, User
+from apps.core.models import Analyze, Report, Account, User, Charge
 from apps.core.forms import UserForm
 from apps.dashboard.forms import AnalyseForm
 
@@ -72,7 +74,7 @@ class SignupView(FormView):
         return redirect(reverse('dashboard:wait'))
 
     def get_success_url(self):
-        messages.success(self.request, 'Bem vindo. Esta é o seu painel, fique a vontade e explore nossa ferramenta.')
+        messages.success(self.request, 'Bem vindo. Este é o seu painel, fique a vontade para explorar nossa ferramenta.')
         return reverse('dashboard:panel')
 
 
@@ -89,6 +91,7 @@ class CreditView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['account'] = Account.objects.filter(user=self.request.user).first()
+        context['charges'] = Charge.objects.filter(user=self.request.user).order_by('-created')
         return context
 
 
@@ -147,49 +150,57 @@ class AnalyseView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class CreatePaymentView(View):
     def post(self, request):
-        amount = round(Decimal(''.join(c for c in request.POST['amount'] if c.isdigit() or c == '.')), 2)
+        amount_raw = round(Decimal(''.join(c for c in request.POST['amount'] if c.isdigit() or c == '.')), 2)
+        amount = int(''.join(c for c in str(amount_raw) if c.isdigit()))
 
-        if amount < 52.90:
-            return
+        url = "https://api.iugu.com/v1/invoices"
 
-        pg.sender = {
-            "name": request.user.first_name,
-            "email": request.user.email,
+        data = {
+            'email': 'jgouveiadev@gmail.com',
+            'due_date': '2019-02-10',
+            'ensure_workday_due_date': 'true',
+            'items': [
+                {
+                    'quantity': 1,
+                    'description': 'Crédito em conta',
+                    'price_cents': amount
+                }
+            ],
+            'payer': {
+                'cpf_cnpj': request.user.document,
+                'name': request.user.first_name,
+                'address.zip_code': request.user.zipcode,
+                'address.number': request.user.number,
+            },
+            'notification_url': 'https://imovelpericiado.com.br/dashboard/iugu-notification'
         }
 
-        pg.items = []
-        pg.add_item(id="0001", description="Crédito conta Imóvel Periciado", amount=str(amount), quantity=1)
-        pg.shipping = {
-            "type": pg.NONE,
-            "street": "AV Beira Mar 5",
-            "number": 2560,
-            "complement": "",
-            "district": "Pontal",
-            "postal_code": "89249000",
-            "city": "Itapoa",
-            "state": "PR",
-            "country": "BRA"
-        }
-        pg.reference_prefix = None
-        pg.reference = str(request.user.pk)
+        invoice = requests.post(url, json=data, auth=HTTPBasicAuth('4115ba20d8d8f56bbc0df1ce257ae174', '')).json()
 
-        response = pg.checkout()
-        return JsonResponse({'code': response.code})
+        charge = Charge()
+        charge.amount = amount_raw
+        charge.ref = invoice['id']
+        charge.user = request.user
+        charge.save()
+
+        return JsonResponse({'url': invoice['secure_url']})
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class PagseguroNotification(View):
-    STATUS_PAGO = 3
+class IuguNotificationView(View):
+    def post(self, request):
+        data = dict(request.POST)
+        status = data['data[status]'][0]
+        ref = data['data[id]'][0]
+        charge = Charge.objects.get(ref=ref)
 
-    def post(self):
-        notification_code = request.POST['notificationCode']
-        notification_data = pg.check_notification(notification_code)
+        if status == 'paid':
+            with transaction.atomic():
+                charge.state = Charge.STATES.paid
+                charge.save()
 
-        if notification_data['status'] == self.STATUS_PAGO:
-            user = User.objects.get(pk=notification_data['reference'])
-            account = Account.objects.get(user=user)
-            account.credit += Decimal(notification_data['grossAmount'])
-            return JsonResponse({'status': 'Payment processed!'})
+                account = Account.objects.filter(user=charge.user).first()
+                account.credit += charge.amount
+                account.save()
 
-        return JsonResponse({'status': 'Nothing done!'})
-
+        return JsonResponse({'status': 'Ok'})

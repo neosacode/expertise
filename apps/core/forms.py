@@ -22,7 +22,7 @@ class UserForm(ModelFormCustom):
 
     class Meta:
         model = User
-        fields = ['type', 'first_name', 'email', 'password', 'whatsapp', 'document']
+        fields = ['type', 'first_name', 'email', 'password', 'whatsapp', 'document', 'zipcode', 'number']
         widgets = {
             'password': forms.PasswordInput()
         }
@@ -33,6 +33,8 @@ class UserForm(ModelFormCustom):
             'whatsapp': {'class': 'form-control'},
             'document': {'class': 'form-control'},
             'password': {'class': 'form-control'},
+            'zipcode': {'class': 'form-control'},
+            'number': {'class': 'form-control'},
         }
         required_fields = [
             'email',
@@ -44,7 +46,6 @@ class UserForm(ModelFormCustom):
         cleaned_data = super().clean()
         signup_type = cleaned_data.get('type')
         whatsapp = cleaned_data.get('whatsapp')
-        document = cleaned_data.get('document')
 
         if signup_type != User.TYPE_CHOICES[1][0]:
             return
