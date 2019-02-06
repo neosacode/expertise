@@ -174,7 +174,8 @@ class CreatePaymentView(View):
                 'address.street': request.user.address,
                 'address.district': request.user.district,
             },
-            'notification_url': 'https://imovelpericiado.com.br/dashboard/iugu-notification'
+            'notification_url': 'https://imovelpericiado.com.br/dashboard/iugu-notification',
+            'return_url': 'https://imovelpericiado.com.br/dashboard/new-analyze',
         }
 
         invoice = requests.post(url, json=data, auth=HTTPBasicAuth('6C5DE8AAEE9C4C129B27656EC4BC5A64', '')).json()
