@@ -177,7 +177,7 @@ class CreatePaymentView(View):
             'notification_url': 'https://imovelpericiado.com.br/dashboard/iugu-notification'
         }
 
-        invoice = requests.post(url, json=data, auth=HTTPBasicAuth('4115ba20d8d8f56bbc0df1ce257ae174', '')).json()
+        invoice = requests.post(url, json=data, auth=HTTPBasicAuth('6C5DE8AAEE9C4C129B27656EC4BC5A64', '')).json()
 
         print(invoice)
 
