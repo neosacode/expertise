@@ -32,6 +32,8 @@ class User(AbstractUser, BaseModel):
     email = models.EmailField(unique=True)
     number = models.CharField(max_length=255, null=True, verbose_name=_("Número do seu Endereço"))
     zipcode = models.CharField(max_length=10, null=True, verbose_name=_("CEP do seu Endereço"))
+    address = models.CharField(max_length=255, null=True, verbose_name=_("Endereço"))
+    district = models.CharField(max_length=255, null=True, verbose_name=_("Bairro"))
 
     class Meta:
         verbose_name = _("User")

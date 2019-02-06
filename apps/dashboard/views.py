@@ -177,6 +177,8 @@ class CreatePaymentView(View):
 
         invoice = requests.post(url, json=data, auth=HTTPBasicAuth('4115ba20d8d8f56bbc0df1ce257ae174', '')).json()
 
+        print(invoice)
+
         charge = Charge()
         charge.amount = amount_raw
         charge.ref = invoice['id']
