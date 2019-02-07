@@ -32,19 +32,22 @@
             </div>
 
             <p>Por motivos de segurança, usamos a Iugu como meio de pagamento, por favor, clique no botão para colocar créditos.</p>
-            <hr>
+            <hr class="border-0">
 
             <a href="#" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#card-modal" id="pagar-com-iugu">
-                <h1><img src="https://iugu.com/wp-content/uploads/2017/07/logo_IUGU_horizontal.png" width="100"></h1>
-                <small class="text-uppercase">Pagar com Iugu</small>
+                <h1><i class="fas fa-credit-card"></i></h1>
+                <small class="text-uppercase fs-20">Pagar</small>
             </a>
         </div>
+
         <div class="col-md-6">
+            <hr class="mt-5 mb-5 d-lg-none">
+
             <h5 class="mb-3"><i class="fas fa-history"></i> HISTÓRICO</h5>
 
             <p><small>Suas faturas aparecem aqui, você pode acompanhar todo o histórico de valores creditados para organizar as finanças.</small></p>
 
-            <table class="table shadow-sm table-bordered">
+            <table class="table shadow-sm table-bordered tablesaw" data-tablesaw-mode="stack">
                 <thead>
                     <tr class="fs-12">
                         <th>DATA</th>

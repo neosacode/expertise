@@ -1,5 +1,9 @@
-@media (max-width: 576px) {
+@media (max-width: 992px) {
 	.nav .btn {
 		width: 100%;
+	}
+
+	.mt-10 {
+		margin-top: 1em !important;
 	}
 }

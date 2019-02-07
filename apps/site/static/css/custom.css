@@ -144,18 +144,21 @@ body {
 	position: relative;
 }
 
+.checklist-real-estate li small {
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .checklist-real-estate li.ok {
 	background-color: #FAFAFA;
 	padding: 20px 40px 20px 60px;
 	margin-bottom: 20px;
 	color: #327d32;
-	font-weight: bold;
 }
 
 .checklist-real-estate li.not-ok {
 	background-color: #FAFAFA;
 	color: #ff5719;
-	font-weight: bold;
 	padding: 20px 40px 20px 60px;
 	margin-bottom: 20px;
 }
@@ -189,4 +192,10 @@ body {
 
 small {
 	font-style: 90% !important;
+}
+
+footer {
+	background-color: #FAFAFA;
+	padding: 2rem;
+	margin-top: 100rem;
 }

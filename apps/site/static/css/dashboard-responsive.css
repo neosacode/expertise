@@ -1,0 +1,24 @@
+@media (max-width: 992px) {
+	nav > div {
+		width: 100%;
+	}
+	nav .btn {
+		width: 100%;
+		margin-right: 0 !important;
+		margin-bottom: 10px;
+	}
+
+	.nav-item {
+		padding-left: 0 !important;
+	}
+
+	.logo {
+		width: 100%;
+		text-align: center;
+	}
+}
+
+.btn-smm {
+	padding: 10px !important;
+	font-size: 12px !important;
+}

@@ -16,7 +16,7 @@
                 <a href="#" class="btn btn-warning">Solicitar Orçamento</a>
             {% endif %}
 
-            <div class="card mt-4 shadow">
+            <div class="card mt-4 shadow-sm">
                 <div class="card-body">
                    Solicitada em: <strong>{{ analyze.created }}</strong><br>
                     <hr>
@@ -77,8 +77,6 @@
         $('.popover').popover('hide');
         $('.tooltip').tooltip('hide');
       });
-
-      $('.checklist-real-estate li').popover('show');
 
       $('[data-toggle=popover]').on('click', function (e) {
            $('[data-toggle=popover]').not(this).popover('hide');
