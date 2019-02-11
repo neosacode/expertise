@@ -1,6 +1,8 @@
 import requests
 from requests.auth import HTTPBasicAuth
+from datetime import timedelta
 from decimal import Decimal
+from django.utils import timezone
 from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.views import LoginView, logout_then_login
@@ -156,8 +158,8 @@ class CreatePaymentView(View):
         url = "https://api.iugu.com/v1/invoices"
 
         data = {
-            'email': 'jgouveiadev@gmail.com',
-            'due_date': '2019-02-10',
+            'email': request.user.email,
+            'due_date': (timezone.now() + timedelta(days=2)).isoformat(),
             'ensure_workday_due_date': 'true',
             'items': [
                 {
