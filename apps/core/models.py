@@ -147,12 +147,12 @@ class Report(BaseModel, TimeStampedModel):
 
 
 class Account(BaseModel, TimeStampedModel):
-    user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE)
-    credit = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit available for new requests"), default=Decimal('0'))
-    credit_used = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit used"), default=Decimal('0'))
-    request_price = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Request price"), default=Decimal('52.90'))
-    requests = models.IntegerField(verbose_name=_("Requests available for free"), default=0)
-    iugu_data = JSONField(verbose_name=_("Iugu Credit Card Data"), default=dict)
+    user = models.OneToOneField(User, verbose_name=_("User"), on_delete=models.CASCADE, editable=False)
+    credit = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit available for new requests"), default=Decimal('0'), blank=True)
+    credit_used = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Credit used"), default=Decimal('0'), blank=True)
+    request_price = models.DecimalField(max_digits=20, decimal_places=4, verbose_name=_("Request price"), default=Decimal('52.90'), blank=True)
+    requests = models.IntegerField(verbose_name=_("Requests available for free"), default=0, blank=True)
+    iugu_data = JSONField(verbose_name=_("Iugu Credit Card Data"), default=dict, blank=True)
 
     class Meta:
         verbose_name = _("Account")
