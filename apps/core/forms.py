@@ -54,6 +54,3 @@ class UserForm(ModelFormCustom):
 
         if not whatsapp:
             self.add_error('whatsapp', _('This field is required'))
-
-        if not document:
-            self.add_error('document', _('This field is required'))
