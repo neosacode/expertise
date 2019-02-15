@@ -23,7 +23,10 @@ class User(AbstractUser, BaseModel):
 
     TYPE_CHOICES = (
         ('owner', 'Pessoa Física'),
-        ('real_estate', 'Imobiliária')
+        ('company', 'Pessoa Jurídica'),
+        ('real_estate', 'Imobiliária'),
+        ('self_employed_broker', 'Corretor Autônomo'),
+        ('Lawyer', 'Advogado'),
     )
 
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default=TYPE_CHOICES[0][0], verbose_name='Qual o seu perfil?')
