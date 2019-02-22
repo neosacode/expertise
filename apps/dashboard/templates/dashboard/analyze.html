@@ -16,6 +16,11 @@
                 <a href="#" class="btn btn-warning">Solicitar Orçamento</a>
             {% endif %}
 
+            {% if analyze.state == 'analyzed' and request.user.can_download_registration %}
+              <hr class="mt-3 mb-3">
+              <a href="{{ analyze.registration.path }}" class="btn btn-primary"><i class="fas fa-download"></i> Baixar Matrícula</a>
+            {% endif %}
+
             <div class="card mt-4 shadow-sm">
                 <div class="card-body">
                    Solicitada em: <strong>{{ analyze.created }}</strong><br>
@@ -32,6 +37,7 @@
         </div>
 
         <div class="col-md-6">
+
             {% if analyze.state != 'analyzed' %}
                 <div class="alert mt-3 alert-warning shadow-sm">
                     <strong>Perícia em andamento, aguarde... <i class="fas fa-clock"></i></strong><br>

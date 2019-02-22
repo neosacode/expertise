@@ -14,3 +14,4 @@ django-anymail[mailgun]
 django-templated-email
 pagseguro
 requests
+django-s3-storage

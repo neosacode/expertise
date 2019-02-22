@@ -3,11 +3,15 @@ from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
+from django_s3_storage.storage import S3Storage
 from cities_light.models import Region, City
 from model_utils import FieldTracker
 from model_utils.models import TimeStampedModel
 from extended_choices import Choices
 from django.contrib.postgres.fields import JSONField
+
+
+storage = S3Storage(aws_s3_bucket_name='test_bucket')
 
 
 class BaseModel(models.Model):
@@ -37,6 +41,7 @@ class User(AbstractUser, BaseModel):
     zipcode = models.CharField(max_length=10, null=True, verbose_name=_("CEP do seu Endereço"))
     address = models.CharField(max_length=255, null=True, verbose_name=_("Endereço"))
     district = models.CharField(max_length=255, null=True, verbose_name=_("Bairro"))
+    can_download_registration = models.BooleanField(default=False, verbose_name=_("Pode fazer download da matrícula"))
 
     class Meta:
         verbose_name = _("User")
@@ -90,7 +95,7 @@ class Analyze(BaseModel, TimeStampedModel):
     block = models.CharField(max_length=20, null=True, verbose_name=_("Block"))
     lot = models.CharField(max_length=20, null=True, verbose_name=_("Lot"))
     registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Registration Number"))
-    registration = models.FileField(null=True, verbose_name=_("Registration"))
+    registration = models.FileField(null=True, verbose_name=_("Registration"), storage=storage)
     type = models.CharField(max_length=30, choices=TYPES, default=TYPES.house, verbose_name=_("Type"))
     complement = models.CharField(max_length=100, verbose_name=_("complement"), null=True, blank=True)
     tracker = FieldTracker()
