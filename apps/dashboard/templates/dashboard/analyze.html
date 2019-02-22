@@ -18,7 +18,7 @@
 
             {% if analyze.state == 'analyzed' and request.user.can_download_registration %}
               <hr class="mt-3 mb-3">
-              <a href="{{ analyze.registration.path }}" class="btn btn-primary"><i class="fas fa-download"></i> Baixar Matrícula</a>
+              <a href="{{ analyze.registration.path }}" target="_blank" class="btn btn-primary"><i class="fas fa-download"></i> Baixar Matrícula</a>
             {% endif %}
 
             <div class="card mt-4 shadow-sm">
