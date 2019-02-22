@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Quadra</label>
+                            <label>Quadra/Bloco se houver</label>
                             {{ form.block }}
                                 {% for error in form.block.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
-                            <label>Lote</label>
+                            <label>Lote/N do AP se houver</label>
                             {{ form.lot }}
                                 {% for error in form.lot.errors %}
                               <small><strong class="text-danger">{{ error }}</strong></small>
