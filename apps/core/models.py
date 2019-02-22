@@ -11,9 +11,6 @@ from extended_choices import Choices
 from django.contrib.postgres.fields import JSONField
 
 
-storage = S3Storage(aws_s3_bucket_name='test_bucket')
-
-
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
@@ -95,7 +92,7 @@ class Analyze(BaseModel, TimeStampedModel):
     block = models.CharField(max_length=20, null=True, verbose_name=_("Block"))
     lot = models.CharField(max_length=20, null=True, verbose_name=_("Lot"))
     registration_number = models.CharField(max_length=20, null=True, verbose_name=_("Registration Number"))
-    registration = models.FileField(null=True, verbose_name=_("Registration"), storage=storage)
+    registration = models.FileField(null=True, verbose_name=_("Registration"), storage=S3Storage())
     type = models.CharField(max_length=30, choices=TYPES, default=TYPES.house, verbose_name=_("Type"))
     complement = models.CharField(max_length=100, verbose_name=_("complement"), null=True, blank=True)
     tracker = FieldTracker()
